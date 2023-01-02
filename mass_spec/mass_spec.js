@@ -403,14 +403,14 @@ if (reversed == null) { reversed = false; }
 
 	// sample_copy
 	this.instance_1 = new lib.samplecopy();
-	this.instance_1.setTransform(342.6,363,0.6166,0.6138,0,0,0,0.2,0.5);
+	this.instance_1.setTransform(342.7,361.25,0.8043,0.7995,0,0,0,0.3,0.5);
 	this.instance_1._off = true;
 
 	this.instance_2 = new lib.Symbol5();
-	this.instance_2.setTransform(941.4,363.05);
+	this.instance_2.setTransform(941.4,361.25);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[]}).to({state:[{t:this.instance_1}]},10).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_1}]},39).to({state:[{t:this.instance_1}]},1).to({state:[{t:this.instance_2}]},1).wait(1));
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(10).to({_off:false},0).wait(1).to({regX:0,regY:0,x:347.5376,y:362.7},0).wait(1).to({x:353.0018},0).wait(1).to({x:358.8927},0).wait(1).to({x:365.2101},0).wait(1).to({x:371.9543},0).wait(1).to({x:379.125},0).wait(1).to({x:386.7224},0).wait(1).to({x:394.7465},0).wait(1).to({x:403.1971},0).wait(1).to({x:412.0744},0).wait(1).to({x:421.3784},0).wait(1).to({x:431.1089},0).wait(1).to({x:441.2662},0).wait(1).to({regX:0.2,regY:0.5,x:451.95,y:363},0).to({x:933.1},39).wait(1).to({x:941.2},0).to({_off:true},1).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(10).to({_off:false},0).wait(1).to({regX:0,regY:0,x:347.488,y:360.85},0).wait(1).to({x:352.9527},0).wait(1).to({x:358.8441},0).wait(1).to({x:365.1622},0).wait(1).to({x:371.9069},0).wait(1).to({x:379.0783},0).wait(1).to({x:386.6764},0).wait(1).to({x:394.7011},0).wait(1).to({x:403.1526},0).wait(1).to({x:412.0307},0).wait(1).to({x:421.3354},0).wait(1).to({x:431.0669},0).wait(1).to({x:441.225},0).wait(1).to({regX:0.2,regY:0.5,x:452,y:361.25},0).to({x:933.15},39).wait(1).to({x:941.2},0).to({_off:true},1).wait(1));
 
 	// sample_copy
 	this.instance_3 = new lib.samplecopy();
