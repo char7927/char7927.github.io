@@ -749,8 +749,7 @@ if (reversed == null) { reversed = false; }
 		}
 		this.bn.addEventListener('click',this.chuckIt.bind(this));
 		this.refreshIF = function() {
-			console.log(1);
-			console.log(window.parent.frames[0].location.reload());
+			window.parent.frames[0].location.reload();
 		}
 		this.re_btn.addEventListener('click',this.refreshIF);
 	}
