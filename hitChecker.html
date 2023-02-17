@@ -19,6 +19,7 @@ End Google Tag Manager -->
 </script>
 
 <title>Checking Tags</title>
+<base id="myBase" target="_self">
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -27,19 +28,23 @@ body {
 <script>
 function enableLinks() {
 	num = document.getElementById("money").value;
-	bl = Boolean(num.length);
-	//for (i=0; i<3; i++) {
-	//	document.getElementById("btn"+i).disabled=!bl;
-	//}
-}
-function gotoSite(num) {
-	val = Math.floor(document.getElementById("money").value);
-	if(val < 0) {
-		val = 0;
+	if(num.length > 0) {
+		document.getElementById("myBase").target = "_blank";
+		num = Math.floor(num);
+		if(num < 0) {
+			num = 0;
+		}
+		for (i=0; i<3; i++) {
+			document.getElementById("link"+i).href="https://donation.dec.org.uk/turkey-syria-earthquake-appeal?ch=" + i + "&val=" + num;
+			document.getElementsByTagName('a')[i].style.color='blue';
+		}
+	}else{
+		document.getElementById("myBase").target = "_self";
+		for (i=0; i<3; i++) {
+			document.getElementById("link"+i).href="URL:void(0)";
+			document.getElementsByTagName('a')[i].style.color='gray';
+		}
 	}
-	document.getElementById("thnk").hidden=false;
-	document.getElementById("ddl").hidden=true;
-	window.open("https://donation.dec.org.uk/turkey-syria-earthquake-appeal?lecture_vote="+num+"&val="+val, "_blank");
 }
 </script>
 </head>
@@ -60,7 +65,7 @@ End Google Tag Manager (noscript) -->
 <table>
 <tr><th>Rick and Morty</th><th>Squid Game</th><th>Chainsaw Man</th></tr>
 <tr><td><img src="ram.jpg" alt="Rick and Morty"></td><td><img src="sg.jpg" alt="Squid Game"></td><td><img src="cm.jpg" alt="Chainsaw Man" height="168px"></td><tr>
-<tr><td><a id="link0" href="https://donation.dec.org.uk/turkey-syria-earthquake-appeal?val=0">Vote for Rick and Morty!</a></td><td><button id="btn1" type="button" disabled onclick="gotoSite(1);">Vote for Squid Game!</button></td><td><button id="btn2" type="button" disabled onclick="gotoSite(2);">Vote for Chainsaw Man!</button></td></tr>
+<tr><td><a id="link0" href="URL:void(0)" style="color:gray">Vote for Rick and Morty!</a></td><td><a id="link1" href="URL:void(0)" style="color:gray">Vote for Squid Game!</a></td><td><a id="link2" href="URL:void(0)" style="color:gray">Vote for Chainsaw Man!</a></td></tr>
 </table>
 <p>(The links take you directly to a reputable charity website addressing the Turkey-Syria earthquake crisis, and allow me to record the total pledge for each option.)</p>
 <!--</a>-->
