@@ -1,6 +1,5 @@
 <html>
 <head>
-<title>Checking Tags</title>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,6 +7,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PWGBW9Q');</script>
 <!-- End Google Tag Manager -->
+<title>Checking Tags</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+<script>
+function enableLinks() {
+	num = document.getElementById("money").value;
+	bl = Boolean(num.length);
+	for (i=0; i<3; i++) {
+		document.getElementById("btn"+i).disabled=!bl;
+	}
+}
+function gotoSite(num) {
+	val = Math.floor(document.getElementById("money").value);
+	if(val < 0) {
+		val = 0;
+	}
+	document.getElementById("thnk").hidden=false;
+	document.getElementById("ddl").hidden=true;
+	window.open("https://donation.dec.org.uk/turkey-syria-earthquake-appeal?lecture_vote="+num+"&val="+val, "_blank");
+}
+</script>
 </head>
 
 <body>
@@ -15,6 +38,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWGBW9Q"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<p>Is this page registering hits?</p>
+<h1>Turkey-Syria Earthquake Appeal</h1>
+<p>Following the recent earthquakes, would you like to donate towards helping with the emergency relief efforts?</p>
+<h3>Vote for one of the styles below; I will change one of the final FNM metabolism lectures to match the style which raises the most money!</h3>
+<br />
+<p>Please enter the amount you have decided to donate (or have convinced others to donate?): £<input id="money" type="number" oninput="enableLinks()"><br />
+(I know times are tough, if you can't donate anything, just enter 0 and vote anyway!)
+</p>
+<!--<a href="https://donation.dec.org.uk/turkey-syria-earthquake-appeal">-->
+<table>
+<tr><th>Rick and Morty</th><th>Squid Game</th><th>Chainsaw Man</th></tr>
+<tr><td><img src="ram.jpg" alt="Rick and Morty"></td><td><img src="sg.jpg" alt="Squid Game"></td><td><img src="cm.jpg" alt="Chainsaw Man" height="168px"></td><tr>
+<tr><td><button id="btn0" type="button" disabled onclick="gotoSite(0);">Vote for Rick and Morty!</button></td><td><button id="btn1" type="button" disabled onclick="gotoSite(1);">Vote for Squid Game!</button></td><td><button id="btn2" type="button" disabled onclick="gotoSite(2);">Vote for Chainsaw Man!</button></td></tr>
+</table>
+<p>(The buttons take you directly to a reputable charity website addressing the Turkey-Syria earthquake crisis, and allow me to record the total pledge for each option.)</p>
+<!--</a>-->
+<span id="ddl"><h3>Voting deadline is 1st March (gives me time to make the slides).</h3></span>
+<span id="thnk" hidden><h1>Thank you!!!</h1></span>
 </body>
 </html>
