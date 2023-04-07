@@ -1,10 +1,32 @@
+<!DOCTYPE html>
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>candy_crush_style</title>
+<!-- write your code here -->
+<style>
+  #animation_container {
+	position:absolute;
+	margin:auto;
+	left:0;right:0;
+	top:0;bottom:0;
+  }
+</style>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script>
 (function (cjs, an) {
-
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [];
-
-
 (lib.AnMovieClip = function(){
 	this.actionFrames = [];
 	this.ignorePause = false;
@@ -22,9 +44,6 @@ lib.ssMetadata = [];
 	}
 }).prototype = p = new cjs.MovieClip();
 // symbols:
-
-
-
 // stage content:
 (lib.candy_crush_style = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = false; }
@@ -36,31 +55,23 @@ if (reversed == null) { reversed = false; }
 	props.loop = loop;
 	props.reversed = reversed;
 	cjs.MovieClip.apply(this,[props]);
-
 	// Layer_2
 	this.shape = new cjs.Shape();
 	this.shape.graphics.f().s("#000000").ss(1,1,1).p("Eg6bhibMB03AAAMAAADE3Mh03AAAg");
 	this.shape.setTransform(384,640);
-
 	this.shape_1 = new cjs.Shape();
 	this.shape_1.graphics.f("#FFFFFF").s().p("Eg6bBicMAAAjE3MB03AAAMAAADE3g");
 	this.shape_1.setTransform(384,640);
-
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).wait(1));
-
 	// Layer_1
 	this.shape_2 = new cjs.Shape();
 	this.shape_2.graphics.f().s("#000000").ss(1,1,1).p("Eg7/hj/MB3/AAAMAAADH/Mh3/AAAg");
 	this.shape_2.setTransform(384,640);
-
 	this.shape_3 = new cjs.Shape();
 	this.shape_3.graphics.f("#356191").s().p("Eg7/BkAMAAAjH/MB3/AAAMAAADH/g");
 	this.shape_3.setTransform(384,640);
-
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_3},{t:this.shape_2}]}).wait(1));
-
 	this._renderFirstFrame();
-
 }).prototype = p = new lib.AnMovieClip();
 p.nominalBounds = new cjs.Rectangle(383,639,386,642);
 // library properties:
@@ -74,15 +85,10 @@ lib.properties = {
 	manifest: [],
 	preloads: []
 };
-
-
-
 // bootstrap callback support:
-
 (lib.Stage = function(canvas) {
 	createjs.Stage.call(this, canvas);
 }).prototype = p = new createjs.Stage();
-
 p.setAutoPlay = function(autoPlay) {
 	this.tickEnabled = autoPlay;
 }
@@ -90,14 +96,11 @@ p.play = function() { this.tickEnabled = true; this.getChildAt(0).gotoAndPlay(th
 p.stop = function(ms) { if(ms) this.seek(ms); this.tickEnabled = false; }
 p.seek = function(ms) { this.tickEnabled = true; this.getChildAt(0).gotoAndStop(lib.properties.fps * ms / 1000); }
 p.getDuration = function() { return this.getChildAt(0).totalFrames / lib.properties.fps * 1000; }
-
 p.getTimelinePosition = function() { return this.getChildAt(0).currentFrame / lib.properties.fps * 1000; }
-
 an.bootcompsLoaded = an.bootcompsLoaded || [];
 if(!an.bootstrapListeners) {
 	an.bootstrapListeners=[];
 }
-
 an.bootstrapCallback=function(fnCallback) {
 	an.bootstrapListeners.push(fnCallback);
 	if(an.bootcompsLoaded.length > 0) {
@@ -106,7 +109,6 @@ an.bootstrapCallback=function(fnCallback) {
 		}
 	}
 };
-
 an.compositions = an.compositions || {};
 an.compositions['4A558910A7472947B1A34A0EA5410C9E'] = {
 	getStage: function() { return exportRoot.stage; },
@@ -114,19 +116,15 @@ an.compositions['4A558910A7472947B1A34A0EA5410C9E'] = {
 	getSpriteSheet: function() { return ss; },
 	getImages: function() { return img; }
 };
-
 an.compositionLoaded = function(id) {
 	an.bootcompsLoaded.push(id);
 	for(var j=0; j<an.bootstrapListeners.length; j++) {
 		an.bootstrapListeners[j](id);
 	}
 }
-
 an.getComposition = function(id) {
 	return an.compositions[id];
 }
-
-
 an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers) {		
 	var lastW, lastH, lastS=1;		
 	window.addEventListener('resize', resizeCanvas);		
@@ -187,7 +185,44 @@ an.handleFilterCache = function(event) {
 		}
 	}
 }
-
-
 })(createjs = createjs||{}, AdobeAn = AdobeAn||{});
 var createjs, AdobeAn;
+</script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("4A558910A7472947B1A34A0EA5410C9E");
+	var lib=comp.getLibrary();
+	handleComplete({},comp);
+}
+function handleComplete(evt,comp) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	exportRoot = new lib.candy_crush_style();
+	stage = new lib.Stage(canvas);	
+	//Registers the "tick" event listener.
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	//Code to support hidpi screens and responsive scaling.
+	AdobeAn.makeResponsive(true,'both',true,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+	<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:768px; height:1280px">
+		<canvas id="canvas" width="768" height="1280" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:768px; height:1280px; position: absolute; left: 0px; top: 0px; display: block;">
+		</div>
+	</div>
+</body>
+</html>
