@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<title>WS1</title>
+<title>WS2</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 	</form>
 	<div id="messages"></div>
 	<script>
-		const webSocket = new WebSocket('wss://47a5-147-12-250-71.ngrok.io:8080');
+		const webSocket = new WebSocket('wss://47a5-147-12-250-71.ngrok.io');
 		webSocket.onmessage = (event) => {
 			console.log(event);
 			document.getElementById('messages').innerHTML += 'Message from server: ' + event.data + "<br />";
