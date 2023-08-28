@@ -16,9 +16,9 @@
 		}
 		function handleMotion(e) {
 			console.log(e);
-			document.getElementById('rep4').innerHTML = e.acceleration;
-			document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity;
-			document.getElementById('rep6').innerHTML = e.rotationRate;
+			document.getElementById('rep4').innerHTML = e.acceleration.x;
+			document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity.x;
+			document.getElementById('rep6').innerHTML = e.rotationRate.alpha;
 			document.getElementById('rep7').innerHTML = e.interval;
 		}
 		window.addEventListener("deviceorientation",handleOrientation);
@@ -38,7 +38,7 @@
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
-	<p>acceleration: <span id='rep4'></span></p>
+	<p>ACCELERATION: <span id='rep4'></span></p>
 	<p>accelIncGrav: <span id='rep5'></span></p>
 	<p>rotationRate: <span id='rep6'></span></p>
 	<p>Interval: <span id='rep7'></span></p>
