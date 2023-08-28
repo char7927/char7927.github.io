@@ -8,7 +8,15 @@
 <title>Untitled Document</title>
 	<script>
 		function init() {
-			if(window.DeviceOrientationEvent) {
+			window.DeviceMotionEvent.requestPermission()
+.then(response => {
+  if (response == 'granted') {
+    // permission granted
+  } else {
+    // permission not granted
+  }
+})
+			/*if(window.DeviceOrientationEvent) {
 				document.getElementById("rep8").innerHTML = "do should work";
 				window.addEventListener("deviceorientation", function (e) {
 					console.log(e);
@@ -31,13 +39,13 @@
 				});
 			}else{
 				document.getElementById("rep8").innerHTML = "it doesn't work";
-			}
+			}*/
 		}
 	</script>
 </head>
 
 <body onload="init();">
-	<p>Absolute orientation: <span id='rep0'></div></p>
+	<p><strong>Absolute orientation:</strong> <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
