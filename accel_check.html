@@ -24,6 +24,7 @@
 		window.addEventListener("deviceorientation",handleOrientation);
 		window.addEventListener("devicemotion",handleMotion);
 		function showup() {
+			console.log('anyhing?');
 			if(window.DeviceOrientationEvent) {
 				document.getElementById("rep8").innerHTML = "it should work";
 			}else{
