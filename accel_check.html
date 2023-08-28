@@ -14,7 +14,9 @@
 				DeviceMotionEvent.requestPermission()
         		.then(permissionState => {
           			if (permissionState === 'granted') {
-            			window.addEventListener('devicemotion', () => {});
+            			window.addEventListener('devicemotion', (e) => {
+							document.getElementById('rep4').innerHTML = e.acceleration.x;
+						});
           			}
         		})
         		.catch(console.error);
@@ -51,7 +53,7 @@
 </head>
 
 <body onload="init();">
-	<button onclick="rp()">Request Motion</button>
+	<button onclick="rp()">Request Motion Please</button>
 	<p><strong>Absolute orientation:</strong> <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
