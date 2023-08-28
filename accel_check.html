@@ -8,12 +8,14 @@
 <title>Untitled Document</title>
 	<script>
 		function handleOrientation(e) {
+			console.log(e);
 			document.getElementById('rep0').innerHTML = e.absolute;
 			document.getElementById('rep1').innerHTML = e.alpha;
 			document.getElementById('rep2').innerHTML = e.beta;
 			document.getElementById('rep3').innerHTML = e.gamma;
 		}
 		function handleMotion(e) {
+			console.log(e);
 			document.getElementById('rep4').innerHTML = e.acceleration;
 			document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity;
 			document.getElementById('rep6').innerHTML = e.rotationRate;
