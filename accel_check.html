@@ -7,26 +7,28 @@
 <meta http-equiv="Expires" content="0" />
 <title>Untitled Document</title>
 	<script>
-		function handleOrientation(e) {
-			console.log(e);
-			document.getElementById('rep0').innerHTML = e.absolute;
-			document.getElementById('rep1').innerHTML = e.alpha;
-			document.getElementById('rep2').innerHTML = e.beta;
-			document.getElementById('rep3').innerHTML = e.gamma;
-		}
-		function handleMotion(e) {
-			console.log(e);
-			document.getElementById('rep4').innerHTML = e.acceleration.x;
-			document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity.x;
-			document.getElementById('rep6').innerHTML = e.rotationRate.alpha;
-			document.getElementById('rep7').innerHTML = e.interval;
-		}
-		window.addEventListener("deviceorientation",handleOrientation);
-		window.addEventListener("devicemotion",handleMotion);
-		function showup() {
-			console.log('anyhing?');
+		function init() {
 			if(window.DeviceOrientationEvent) {
 				document.getElementById("rep8").innerHTML = "it should work";
+				window.addEventListener("deviceorientation", function (e) {
+					console.log(e);
+					document.getElementById('rep0').innerHTML = e.absolute;
+					document.getElementById('rep1').innerHTML = e.alpha;
+					document.getElementById('rep2').innerHTML = e.beta;
+					document.getElementById('rep3').innerHTML = e.gamma;
+				},false);
+			}else{
+				document.getElementById("rep8").innerHTML = "it doesn't work";
+			}
+			if(window.DeviceMotionEvent) {
+				document.getElementById("rep8").innerHTML = "it should work";					
+				window.addEventListener("devicemotion", function (e) {
+					console.log(e);
+					document.getElementById('rep4').innerHTML = e.acceleration.x;
+					document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity.x;
+					document.getElementById('rep6').innerHTML = e.rotationRate.alpha;
+					document.getElementById('rep7').innerHTML = e.interval;
+				});
 			}else{
 				document.getElementById("rep8").innerHTML = "it doesn't work";
 			}
@@ -34,13 +36,13 @@
 	</script>
 </head>
 
-<body onload="showup();">
+<body onload="init();">
 	<p>Absolute orientation: <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
 	<p>acceleration: <span id='rep4'></span></p>
-	<p><strong>accelIncGrav</strong>: <span id='rep5'></span></p>
+	<p>aig: <span id='rep5'></span></p>
 	<p>rotationRate: <span id='rep6'></span></p>
 	<p>Interval: <span id='rep7'></span></p>
 	<p>Support: <span id='rep8'></span></p>
