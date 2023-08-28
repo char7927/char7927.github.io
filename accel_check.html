@@ -7,22 +7,43 @@
 <meta http-equiv="Expires" content="0" />
 <title>Untitled Document</title>
 	<script>
+		var obj = new Object();
 		function init() {
 		}
-		function rp(e) {
-			if (typeof DeviceMotionEvent.requestPermission === 'function') {
-				DeviceMotionEvent.requestPermission()
-        		.then(permissionState => {
-          			if (permissionState === 'granted') {
-            			window.addEventListener('devicemotion', (e) => {
+		function rp1(e) {
+			if(typeof DeviceMotionEvent.requestPermission === 'function') {
+				DeviceMotionEvent.requestPermission().then(permissionState => {
+          			if(permissionState === 'granted') {
+            			/*window.addEventListener('devicemotion', (e) => {
 							document.getElementById('rep4').innerHTML = e.acceleration.x;
-						});
+						});*/
+						window.addEventListener('devicemotion', recordMotion);
+						document.getElementById("r1").setAttribute("hidden", "hidden");
+						document.getElementById("r2").removeAttribute("hidden");
           			}
-        		})
-        		.catch(console.error);
+        		}).catch(console.error);
     		} else {
       // handle regular non iOS 13+ devices
     		}
+		}
+		function rp2(e) {
+			if(typeof DeviceMotionEvent.requestPermission === 'function') {
+				DeviceMotionEvent.requestPermission().then(permissionState => {
+          			if(permissionState === 'granted') {
+            			/*window.addEventListener('devicemotion', (e) => {
+							document.getElementById('rep4').innerHTML = e.acceleration.x;
+						});*/
+						window.addEventListener('devicemotion', recordMotion);
+						document.getElementById("r1").setAttribute("hidden", "hidden");
+						document.getElementById("r2").removeAttribute("hidden");
+          			}
+        		}).catch(console.error);
+    		} else {
+      // handle regular non iOS 13+ devices
+    		}
+		}
+		function recordMotion(e) {
+			document.getElementById('rep4').innerHTML = e.acceleration.x;
 		}
 			/*if(window.DeviceOrientationEvent) {
 				document.getElementById("rep8").innerHTML = "do should work";
@@ -53,7 +74,6 @@
 </head>
 
 <body onload="init();">
-	<button onclick="rp()">Request Motion Please</button>
 	<p><strong>Absolute orientation:</strong> <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
@@ -63,5 +83,7 @@
 	<p>rotationRate: <span id='rep6'></span></p>
 	<p>Interval: <span id='rep7'></span></p>
 	<p>Support: <span id='rep8'></span></p>
+	<button id="r1" onclick="rp1()">Allow Motion Detection</button>
+	<button id="r2" onclick="rp2()" hidden>Allow Orientation Detection</button>
 </body>
 </html>
