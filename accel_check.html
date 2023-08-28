@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+	<script>
+		function handleOrientation(e) {
+			document.getElementById('rep0').innerHTML = e.absolute;
+			document.getElementById('rep1').innerHTML = e.alpha;
+			document.getElementById('rep2').innerHTML = e.beta;
+			document.getElementById('rep3').innerHTML = e.gamma;
+		}
+		function handleMotion(e) {
+			document.getElementById('rep4').innerHTML = e.acceleration;
+			document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity;
+			document.getElementById('rep6').innerHTML = e.rotationRate;
+			document.getElementById('rep7').innerHTML = e.interval;
+		}
+		window.addEventListener("deviceorientation",handleOrientation);
+		window.addEventListener("devicemotion",handleMotion);
+	</script>
+</head>
+
+<body>
+	<p>Absolute orientation: <div id='rep0'></div></p>
+	<p>Absolute orientation: <div id='rep1'></div></p>
+	<p>Absolute orientation: <div id='rep2'></div></p>
+	<p>Absolute orientation: <div id='rep3'></div></p>
+	<p>acceleration: <div id='rep4'></div></p>
+	<p>accelIncGrav: <div id='rep5'></div></p>
+	<p>rotationRate: <div id='rep6'></div></p>
+	<p>Interval: <div id='rep7'></div></p>
+</body>
+</html>
