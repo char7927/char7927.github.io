@@ -27,15 +27,15 @@
     		}
 		}
 		function rp2(e) {
-			if(typeof DeviceMotionEvent.requestPermission === 'function') {
-				DeviceMotionEvent.requestPermission().then(permissionState => {
+			if(typeof DeviceOrientationEvent.requestPermission === 'function') {
+				DeviceOrientationEvent.requestPermission().then(permissionState => {
           			if(permissionState === 'granted') {
             			/*window.addEventListener('devicemotion', (e) => {
 							document.getElementById('rep4').innerHTML = e.acceleration.x;
 						});*/
-						window.addEventListener('devicemotion', recordMotion);
-						document.getElementById("r1").setAttribute("hidden", "hidden");
-						document.getElementById("r2").removeAttribute("hidden");
+						window.addEventListener('deviceorientation', recordOrientation);
+						document.getElementById("r2").setAttribute("hidden", "hidden");
+						document.getElementById('rep8').innerHTML = "Permission granted";
           			}
         		}).catch(console.error);
     		} else {
@@ -43,33 +43,17 @@
     		}
 		}
 		function recordMotion(e) {
-			document.getElementById('rep4').innerHTML = e.acceleration.x;
+			document.getElementById('rep4').innerHTML = String(e.acceleration.x)+","+String(e.acceleration.y)+","+String(e.acceleration.z);
+			document.getElementById('rep5').innerHTML = String(e.accelerationIncludingGravity.x)+","+String(e.accelerationIncludingGravity.y)+","+String(e.accelerationIncludingGravity.z)
+			document.getElementById('rep6').innerHTML = String(e.rotationRate.alpha)+","+String(e.rotationRate.beta)+","+String(e.rotationRate.gamma);
+			document.getElementById('rep7').innerHTML = e.interval;
 		}
-			/*if(window.DeviceOrientationEvent) {
-				document.getElementById("rep8").innerHTML = "do should work";
-				window.addEventListener("deviceorientation", function (e) {
-					console.log(e);
-					document.getElementById('rep0').innerHTML = e.absolute;
-					document.getElementById('rep1').innerHTML = e.alpha;
-					document.getElementById('rep2').innerHTML = e.beta;
-					document.getElementById('rep3').innerHTML = e.gamma;
-				},false);
-			}else{
-				document.getElementById("rep8").innerHTML = "it doesn't work";
-			}
-			if(window.DeviceMotionEvent) {
-				document.getElementById("rep8").innerHTML = "dm should work";					
-				window.addEventListener("devicemotion", function (e) {
-					console.log(e);
-					document.getElementById('rep4').innerHTML = e.acceleration.x;
-					document.getElementById('rep5').innerHTML = e.accelerationIncludingGravity.x;
-					document.getElementById('rep6').innerHTML = e.rotationRate.alpha;
-					document.getElementById('rep7').innerHTML = e.interval;
-				});
-			}else{
-				document.getElementById("rep8").innerHTML = "it doesn't work";
-			}*/
-		//}
+		function recordOrientation(e) {
+			document.getElementById('rep0').innerHTML = e.absolute;
+			document.getElementById('rep1').innerHTML = e.alpha;
+			document.getElementById('rep2').innerHTML = e.beta;
+			document.getElementById('rep3').innerHTML = e.gamma;
+		}
 	</script>
 </head>
 
@@ -82,7 +66,7 @@
 	<p>aig: <span id='rep5'></span></p>
 	<p>rotationRate: <span id='rep6'></span></p>
 	<p>Interval: <span id='rep7'></span></p>
-	<p>Support: <span id='rep8'></span></p>
+	<p>Support: <span id='rep8'>Please click buttons to allow detection:</span></p>
 	<button id="r1" onclick="rp1()">Allow Motion Detection</button>
 	<button id="r2" onclick="rp2()" hidden>Allow Orientation Detection</button>
 </body>
