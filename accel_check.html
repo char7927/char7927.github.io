@@ -9,7 +9,7 @@
 	<script>
 		function init() {
 			if(window.DeviceOrientationEvent) {
-				document.getElementById("rep8").innerHTML = "it should work";
+				document.getElementById("rep8").innerHTML = "do should work";
 				window.addEventListener("deviceorientation", function (e) {
 					console.log(e);
 					document.getElementById('rep0').innerHTML = e.absolute;
@@ -21,7 +21,7 @@
 				document.getElementById("rep8").innerHTML = "it doesn't work";
 			}
 			if(window.DeviceMotionEvent) {
-				document.getElementById("rep8").innerHTML = "it should work";					
+				document.getElementById("rep8").innerHTML = "dm should work";					
 				window.addEventListener("devicemotion", function (e) {
 					console.log(e);
 					document.getElementById('rep4').innerHTML = e.acceleration.x;
