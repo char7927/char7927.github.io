@@ -5,6 +5,7 @@
 <title>Untitled Document</title>
 	<script>
 		function handleOrientation(e) {
+			console.log(e);
 			document.getElementById('rep0').innerHTML = e.absolute;
 			document.getElementById('rep1').innerHTML = e.alpha;
 			document.getElementById('rep2').innerHTML = e.beta;
@@ -18,14 +19,17 @@
 		}
 		window.addEventListener("deviceorientation",handleOrientation);
 		window.addEventListener("devicemotion",handleMotion);
+		function showup() {
+			document.getElementById("rep0").innerHTML = "just checking";
+		}
 	</script>
 </head>
 
-<body>
+<body onload="showup();">
 	<p>Absolute orientation: <div id='rep0'></div></p>
-	<p>Absolute orientation: <div id='rep1'></div></p>
-	<p>Absolute orientation: <div id='rep2'></div></p>
-	<p>Absolute orientation: <div id='rep3'></div></p>
+	<p>alpha: <div id='rep1'></div></p>
+	<p>beta: <div id='rep2'></div></p>
+	<p>gamma: <div id='rep3'></div></p>
 	<p>acceleration: <div id='rep4'></div></p>
 	<p>accelIncGrav: <div id='rep5'></div></p>
 	<p>rotationRate: <div id='rep6'></div></p>
