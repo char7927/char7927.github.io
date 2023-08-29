@@ -53,6 +53,13 @@
 			document.getElementById('rep1').innerHTML = e.alpha;
 			document.getElementById('rep2').innerHTML = e.beta;
 			document.getElementById('rep3').innerHTML = e.gamma;
+			obj.alpha = e.alpha;
+			obj.beta = e.beta;
+			obj.gamma = e.gamma;
+		}
+		myInterval = setInterval(sendMotionObject, 1000);
+		function sendMotionObject() {
+			console.log('sending');
 		}
 	</script>
 </head>
