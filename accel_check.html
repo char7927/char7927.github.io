@@ -9,6 +9,14 @@
 <title>Untitled Document</title>
 	<script>
 		var obj = new Object();
+		const webSocket = new WebSocket('wss://uclbiochem.loca.lt');
+		obj.myId = -1;
+		webSocket.onmessage = (event) => {
+			var m_obj = JSON.parse(event.data);
+			if(m_obj.hasOwnProperty('id')) {
+				obj.myId = m_obj['id'];
+			}
+		};
 		function init() {
 		}
 		function rp1(e) {
@@ -48,6 +56,9 @@
 			document.getElementById('rep5').innerHTML = String(e.accelerationIncludingGravity.x)+","+String(e.accelerationIncludingGravity.y)+","+String(e.accelerationIncludingGravity.z)
 			document.getElementById('rep6').innerHTML = String(e.rotationRate.alpha)+","+String(e.rotationRate.beta)+","+String(e.rotationRate.gamma);
 			document.getElementById('rep7').innerHTML = e.interval;
+			obj.accel_x = e.acceleration.x;
+			obj.accel_y = e.acceleration.y;
+			obj.accel_z = e.acceleration.z;
 		}
 		function recordOrientation(e) {
 			document.getElementById('rep0').innerHTML = e.absolute;
@@ -61,12 +72,13 @@
 		myInterval = setInterval(sendMotionObject, 1000);
 		function sendMotionObject() {
 			console.log('sending');
+			webSocket.send(JSON.stringify(obj));
 		}
 	</script>
 </head>
 
 <body onload="init();">
-	<p>absolute orientation: <span id='rep0'></div></p>
+	<p hidden>absolute orientation: <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
