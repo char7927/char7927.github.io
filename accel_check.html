@@ -47,6 +47,7 @@
 						window.addEventListener('deviceorientation', recordOrientation);
 						document.getElementById("r2").setAttribute("hidden", "hidden");
 						document.getElementById('rep8').innerHTML = "Permission granted";
+						window.setInterval(sendMotionObject, 1000);
           			}
         		}).catch(console.error);
     		} else {
@@ -71,7 +72,6 @@
 			obj.beta = e.beta;
 			obj.gamma = e.gamma;
 		}
-		myInterval = setInterval(sendMotionObject, 1000);
 		function sendMotionObject() {
 			console.log('sending');
 			webSocket.send(JSON.stringify(obj));
