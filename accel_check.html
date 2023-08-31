@@ -16,7 +16,7 @@
 			var m_obj = JSON.parse(event.data);
 			if(m_obj.hasOwnProperty('id')) {
 				obj.myId = m_obj['id'];
-				document.getElementById.innerHTML = String(obj.myId);
+				document.getElementById('rep0').innerHTML = String(obj.myId);
 			}
 		};
 		function init() {
