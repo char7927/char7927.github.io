@@ -74,11 +74,15 @@
 			console.log('sending');
 			webSocket.send(JSON.stringify(obj));
 		}
+		window.addEventListener('beforeunload', () => {
+			var messgObject = {id: myID, closeMe: 1, messg: ""};
+			webSocket.send(JSON.stringify(messgObject));
+		});
 	</script>
 </head>
 
 <body onload="init();">
-	<p hidden>absolute orientation: <span id='rep0'></div></p>
+	<p>absolute orientation: <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
