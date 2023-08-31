@@ -8,17 +8,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<script>
-		var obj = new Object();
+		var obj = {myId: -1,closeMe = 0};
 		const webSocket = new WebSocket('wss://uclbiochem.loca.lt');
-		obj.myId = -1;
-		obj.closeMe = 0;
-		webSocket.onmessage = (event) => {
-			var m_obj = JSON.parse(event.data);
-			if(m_obj.hasOwnProperty('id')) {
-				obj.myId = m_obj['id'];
-				document.getElementById('rep0').innerHTML = String(obj.myId);
-			}
-		};
+		webSocket.onopen = (event) => {
+			webSocket.onmessage = (event) => {
+				var m_obj = JSON.parse(event.data);
+				if(m_obj.hasOwnProperty('id')) {
+					obj.myId = m_obj['id'];
+					document.getElementById('rep0').innerHTML = String(obj.myId);
+				}
+			};
+			
+			window.addEventListener('beforeunload', () => {
+				var messgObject = {myId: obj.myID, closeMe: 1, messg: ""};
+				webSocket.send(JSON.stringify(messgObject));
+			});
+		}
 		function init() {
 		}
 		function rp1(e) {
@@ -76,10 +81,6 @@
 			console.log('sending');
 			//webSocket.send(JSON.stringify(obj));
 		}
-		window.addEventListener('beforeunload', () => {
-			var messgObject = {myId: obj.myID, closeMe: 1, messg: ""};
-			webSocket.send(JSON.stringify(messgObject));
-		});
 	</script>
 </head>
 
