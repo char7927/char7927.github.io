@@ -77,7 +77,7 @@
 			webSocket.send(JSON.stringify(obj));
 		}
 		window.addEventListener('beforeunload', () => {
-			var messgObject = {id: myID, closeMe: 1, messg: ""};
+			var messgObject = {myId: myID, closeMe: 1, messg: ""};
 			webSocket.send(JSON.stringify(messgObject));
 		});
 	</script>
