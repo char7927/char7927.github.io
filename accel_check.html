@@ -52,7 +52,7 @@
 						window.addEventListener('deviceorientation', recordOrientation);
 						document.getElementById("r2").setAttribute("hidden", "hidden");
 						document.getElementById('rep8').innerHTML = "Permission granted";
-						window.setInterval(sendMotionObject, 1000);
+						window.setInterval(sendMotionObject, 100);
           			}
         		}).catch(console.error);
     		} else {
