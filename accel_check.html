@@ -64,7 +64,7 @@
 			obj.accel_z = e.acceleration.z;
 		}
 		function recordOrientation(e) {
-			document.getElementById('rep0').innerHTML = e.absolute;
+			//document.getElementById('rep0').innerHTML = e.absolute;
 			document.getElementById('rep1').innerHTML = e.alpha;
 			document.getElementById('rep2').innerHTML = e.beta;
 			document.getElementById('rep3').innerHTML = e.gamma;
@@ -74,7 +74,7 @@
 		}
 		function sendMotionObject() {
 			console.log('sending');
-			webSocket.send(JSON.stringify(obj));
+			//webSocket.send(JSON.stringify(obj));
 		}
 		window.addEventListener('beforeunload', () => {
 			var messgObject = {myId: obj.myID, closeMe: 1, messg: ""};
