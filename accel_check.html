@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<script>
-		var obj = {myId: -1,closeMe = 0};
+		var obj = {myId: -1,closeMe: 0};
 		const webSocket = new WebSocket('wss://uclbiochem.loca.lt');
 		webSocket.onopen = (event) => {
 			webSocket.onmessage = (event) => {
@@ -85,7 +85,7 @@
 </head>
 
 <body onload="init();">
-	<p><strong>myID:</strong> <span id='rep0'></div></p>
+	<p>myID: <span id='rep0'></div></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
