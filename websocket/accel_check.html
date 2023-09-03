@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<style>
-		body {background-color:cornsilk}
+		body {background-color:lightpink}
 	</style>
 	<script>
 		var obj = new Object();
@@ -17,7 +17,7 @@
 		function establishWS() {
 			webSocket = new WebSocket('wss://uclbiochem.loca.lt');
 			webSocket.onopen = (event) => {
-				document.getElementById('rep8').innerHTML = "Connection made.";
+				document.getElementById('rep0').innerHTML = "Connection made.";
 				checkInterval = setInterval(sendMotionObject,100);
 			}
 		}
