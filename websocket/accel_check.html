@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<style>
-		body {background-color:azure}
+		body {background-color:blueviolet}
 	</style>
 	<script>
 		var obj = new Object();
@@ -38,9 +38,6 @@
 			if(typeof DeviceOrientationEvent.requestPermission === 'function') {
 				DeviceOrientationEvent.requestPermission().then(permissionState => {
           			if(permissionState === 'granted') {
-            			/*window.addEventListener('devicemotion', (e) => {
-							document.getElementById('rep4').innerHTML = e.acceleration.x;
-						});*/
 						window.addEventListener('deviceorientation', recordOrientation);
 						document.getElementById("r2").setAttribute("hidden", "hidden");
 						document.getElementById('rep8').innerHTML = "Motion and orientation detection granted. Establishing websocket connection...";
@@ -53,9 +50,9 @@
     		}
 		}
 		function recordMotion(e) {
-			obj.accel_x = roundTo(e.acceleration.x,100);
-			obj.accel_y = roundTo(e.acceleration.y,100);
-			obj.accel_z = roundTo(e.acceleration.z,100);
+			obj.accel_x = roundTo(e.accelerationIncludingGravity.x,100);
+			obj.accel_y = roundTo(e.accelerationIncludingGravity.y,100);
+			obj.accel_z = roundTo(e.accelerationIncludingGravity.z,100);
 			document.getElementById('rep4').innerHTML = String(obj.accel_x)+","+String(obj.accel_y)+","+String(obj.accel_z);
 			//document.getElementById('rep5').innerHTML = String(e.accelerationIncludingGravity.x)+","+String(e.accelerationIncludingGravity.y)+","+String(e.accelerationIncludingGravity.z)
 			//document.getElementById('rep6').innerHTML = String(e.rotationRate.alpha)+","+String(e.rotationRate.beta)+","+String(e.rotationRate.gamma);
