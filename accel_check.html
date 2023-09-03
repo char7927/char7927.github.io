@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<style>
-		body {background-color:blanchedalmond}
+		body {background-color:cadetblue}
 	</style>
 	<script>
 		var obj = {closeMe: 0};
@@ -20,6 +20,7 @@
 				document.getElementById('rep8').innerHTML = "Connection made, awaiting ID";
 				webSocket.addEventListener("message", setMyId);
 				window.addEventListener('beforeunload', () => {
+					console.log('trying to close');
 					obj.closeMe = 1;
 					webSocket.send(JSON.stringify(obj));
 					clearInterval(checkInterval);
