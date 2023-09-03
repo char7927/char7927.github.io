@@ -8,27 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<style>
-		body {background-color:cadetblue}
+		body {background-color:cornsilk}
 	</style>
 	<script>
-		var obj = {closeMe: 0};
+		var obj = new Object();
 		var webSocket;
 		var checkInterval = null;
 		function establishWS() {
 			webSocket = new WebSocket('wss://uclbiochem.loca.lt');
 			webSocket.onopen = (event) => {
-				document.getElementById('rep8').innerHTML = "Connection made, awaiting ID";
-				webSocket.addEventListener("message", setMyId);
-				window.addEventListener('beforeunload', () => {
-					console.log('trying to close');
-					obj.closeMe = 1;
-					webSocket.send(JSON.stringify(obj));
-					clearInterval(checkInterval);
-					checkInterval = null;
-				});
+				document.getElementById('rep8').innerHTML = "Connection made.";
+				checkInterval = setInterval(sendMotionObject,100);
 			}
 		}
-		
 		function rp1(e) {
 			if(typeof DeviceMotionEvent.requestPermission === 'function') {
 				DeviceMotionEvent.requestPermission().then(permissionState => {
@@ -85,21 +77,11 @@
 		function roundTo(n,place) {
 			return Math.round(n * place)/place;	
 		}
-		function setMyId(e) {
-			var m_obj = JSON.parse(e.data);
-			if(m_obj.hasOwnProperty('id')) {
-				document.getElementById('rep8').innerHTML = "ID received";
-				obj.myId = m_obj['id'];
-				document.getElementById('rep0').innerHTML = String(obj.myId);
-				webSocket.removeEventListener("message", setMyId);
-				checkInterval = setInterval(sendMotionObject,100);
-			}
-		}
 	</script>
 </head>
 
 <body>
-	<p>myID: <span id='rep0'>Not yet obtained, awaiting motion and orientation detection.</span></p>
+	<p>WS Connection: <span id='rep0'>Not yet obtained, awaiting motion and orientation detection.</span></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
