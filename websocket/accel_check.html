@@ -25,7 +25,7 @@
 			if(typeof DeviceMotionEvent.requestPermission === 'function') {
 				DeviceMotionEvent.requestPermission().then(permissionState => {
           			if(permissionState === 'granted') {
-						//window.addEventListener('devicemotion', recordMotion);
+						window.addEventListener('devicemotion', recordMotion);
 						document.getElementById("r1").setAttribute("hidden", "hidden");
 						document.getElementById("r2").removeAttribute("hidden");
           			}
@@ -57,8 +57,8 @@
 			obj.accel_y = roundTo(e.acceleration.y,100);
 			obj.accel_z = roundTo(e.acceleration.z,100);
 			document.getElementById('rep4').innerHTML = String(obj.accel_x)+","+String(obj.accel_y)+","+String(obj.accel_z);
-			document.getElementById('rep5').innerHTML = String(e.accelerationIncludingGravity.x)+","+String(e.accelerationIncludingGravity.y)+","+String(e.accelerationIncludingGravity.z)
-			document.getElementById('rep6').innerHTML = String(e.rotationRate.alpha)+","+String(e.rotationRate.beta)+","+String(e.rotationRate.gamma);
+			//document.getElementById('rep5').innerHTML = String(e.accelerationIncludingGravity.x)+","+String(e.accelerationIncludingGravity.y)+","+String(e.accelerationIncludingGravity.z)
+			//document.getElementById('rep6').innerHTML = String(e.rotationRate.alpha)+","+String(e.rotationRate.beta)+","+String(e.rotationRate.gamma);
 			document.getElementById('rep7').innerHTML = e.interval;
 		}
 		function recordOrientation(e) {
