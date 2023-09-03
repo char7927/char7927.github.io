@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Focus</title>
+	<style>
+		body {
+			background-color: darkkhaki;
+		}
+		* {
+			text-align: center;
+		}
+	</style>
+	<script>
+	var vls = [["I hate the world and it's people.",1],
+			  ["I want to destroy lives with my words.",5]];
+	var tas = [["Concentrate on pleasing others at your own expense.",1],
+			  ["Lie down all day and don't do anything.",4]];
+	function init(e) {
+		var vl_inds = [];
+		var ta_inds = [];
+		for (i=0; i<vls.length; i++) {
+			for (j=0; j<11-vls[i][1]; j++) {
+				vl_inds.push(i);
+			}			
+		}
+		for (i=0; i<tas.length; i++) {
+			for (j=0; j<11-tas[i][1]; j++) {
+				ta_inds.push(i);
+			}			
+		}
+		var v_rand = vls[vl_inds[Math.floor(Math.random()*vl_inds.length)]][0];
+		var t_rand = tas[ta_inds[Math.floor(Math.random()*ta_inds.length)]][0];
+		document.getElementById('vl').innerHTML = v_rand;
+		document.getElementById('ta').innerHTML = t_rand;
+	}
+	function showMsg(event) {
+		document.getElementById("medbtn").setAttribute("hidden", "hidden");
+		document.getElementById("msg").removeAttribute("hidden");
+	}
+	</script>
+</head>
+
+<body onload="init()">
+	<div id="msg" hidden>
+	<p>Remember...</p>
+	<h2 id="vl"></h2>
+	<p>Today's activity...</p>
+	<h2 id="ta"></h2>
+	</div>
+	<button id="medbtn" onclick="showMsg()">I have taken my meds</button>
+</body>
+</html>

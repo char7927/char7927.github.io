@@ -8,24 +8,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Untitled Document</title>
 	<script>
-		var obj = {myId: -1,closeMe: 0};
-		const webSocket = new WebSocket('wss://uclbiochem.loca.lt');
-		webSocket.onopen = (event) => {
-			webSocket.onmessage = (event) => {
-				var m_obj = JSON.parse(event.data);
-				if(m_obj.hasOwnProperty('id')) {
-					obj.myId = m_obj['id'];
-					document.getElementById('rep0').innerHTML = String(obj.myId);
-				}
-			};
-			
-			window.addEventListener('beforeunload', () => {
-				var messgObject = {myId: obj.myID, closeMe: 1, messg: ""};
-				webSocket.send(JSON.stringify(messgObject));
-			});
+		var obj = {closeMe: 0};
+		var webSocket;
+		var checkInterval = null;
+		function establishWS() {
+			webSocket = new WebSocket('wss://uclbiochem.loca.lt');
+			webSocket.onopen = (event) => {
+				webSocket.addEventListener("message", setMyId);
+				window.addEventListener('beforeunload', () => {
+					var messgObject = {myId: obj.myID, closeMe: 1, messg: ""};
+					webSocket.send(JSON.stringify(messgObject));
+					clearInterval(checkInterval);
+					checkInterval = null;
+				});
+			}
 		}
-		function init() {
-		}
+		
 		function rp1(e) {
 			if(typeof DeviceMotionEvent.requestPermission === 'function') {
 				DeviceMotionEvent.requestPermission().then(permissionState => {
@@ -48,8 +46,9 @@
 						});*/
 						window.addEventListener('deviceorientation', recordOrientation);
 						document.getElementById("r2").setAttribute("hidden", "hidden");
-						document.getElementById('rep8').innerHTML = "Permission granted";
-						window.setInterval(sendMotionObject, 100);
+						document.getElementById('rep8').innerHTML = "Motion and orientation detection granted. Establishing websocket connection...";
+						establishWS();
+						//window.setInterval(sendMotionObject, 100);
           			}
         		}).catch(console.error);
     		} else {
@@ -66,7 +65,7 @@
 			document.getElementById('rep7').innerHTML = e.interval;
 		}
 		function recordOrientation(e) {
-			//obj.alpha = roundTo(e.alpha,100);
+			obj.alpha = roundTo(e.alpha,100);
 			obj.beta = roundTo(e.beta,100);
 			obj.gamma = roundTo(e.gamma,100);
 			//document.getElementById('rep0').innerHTML = e.absolute;
@@ -81,11 +80,20 @@
 		function roundTo(n,place) {
 			return Math.round(n * place)/place;	
 		}
+		function setMyId(e) {
+			var m_obj = JSON.parse(e.data);
+			if(m_obj.hasOwnProperty('id')) {
+				obj.myId = m_obj['id'];
+				document.getElementById('rep0').innerHTML = String(obj.myId);
+				webSocket.removeEventListener("message", setMyId);
+				checkInterval = setInterval(sendMotionObject,100);
+			}
+		}
 	</script>
 </head>
 
-<body onload="init();">
-	<p>myID: <span id='rep0'></div></p>
+<body>
+	<p>myID: <span id='rep0'>Not yet obtained, awaiting motion and orientation detection.</span></p>
 	<p>alpha: <span id='rep1'></span></p>
 	<p>beta: <span id='rep2'></span></p>
 	<p>gamma: <span id='rep3'></span></p>
