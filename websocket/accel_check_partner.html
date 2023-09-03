@@ -70,7 +70,7 @@ function establishWS() {
 	console.log('establishing WS');
 	webSocket = new WebSocket('wss://uclbiochem.loca.lt');
 	webSocket.onopen = (event) => {
-		exportRoot.fdbck.text = "Connection made";
+		exportRoot.fdbck.text = "Connection made. Waiting for info.";
 		webSocket.addEventListener("message", respondTo);
 		checkInterval = setInterval(checkIn, 58000);
 		webSocket.addEventListener("close", acceptClose);
@@ -82,7 +82,7 @@ function establishWS() {
 }
 function respondTo(e) {
 	var m_obj = JSON.parse(e.data);
-	console.log(e.data);
+	exportRoot.fdbck.text = e.data;
 	exportRoot.moveMe(m_obj);
 }
 function checkIn() {
@@ -90,7 +90,7 @@ function checkIn() {
 	webSocket.send(JSON.stringify(obj));
 }
 function acceptClose(e) {
-	console.log('socket closed');
+	exportRoot.fdbck.text = 'Socket closed.';
 	clearInterval(checkInterval);
 	checkInterval = null;
 }
