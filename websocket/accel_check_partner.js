@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"accel_check_partner_atlas_1", frames: [[141,0,58,137],[73,0,66,137],[0,0,71,137]]}
+		{name:"accel_check_partner_atlas_1", frames: [[0,452,986,96],[452,278,58,137],[452,139,66,137],[452,0,71,137],[0,0,450,450]]}
 ];
 
 
@@ -27,23 +27,37 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_3 = function() {
+(lib.CachedBmp_4 = function() {
 	this.initialize(ss["accel_check_partner_atlas_1"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_2 = function() {
+(lib.CachedBmp_3 = function() {
 	this.initialize(ss["accel_check_partner_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_1 = function() {
+(lib.CachedBmp_2 = function() {
 	this.initialize(ss["accel_check_partner_atlas_1"]);
 	this.gotoAndStop(2);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_1 = function() {
+	this.initialize(ss["accel_check_partner_atlas_1"]);
+	this.gotoAndStop(3);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.Bitmap1 = function() {
+	this.initialize(ss["accel_check_partner_atlas_1"]);
+	this.gotoAndStop(4);
 }).prototype = p = new cjs.Sprite();
 // helper functions:
 
@@ -117,32 +131,48 @@ if (reversed == null) { reversed = false; }
 
 	// Layer_1
 	this.instance = new lib.CachedBmp_3();
-	this.instance.setTransform(800.25,349.65,0.5,0.5);
+	this.instance.setTransform(800.25,482.45,0.5,0.5);
 
 	this.instance_1 = new lib.CachedBmp_2();
-	this.instance_1.setTransform(495.45,349.65,0.5,0.5);
+	this.instance_1.setTransform(495.45,482.45,0.5,0.5);
 
 	this.instance_2 = new lib.CachedBmp_1();
-	this.instance_2.setTransform(191.55,349.65,0.5,0.5);
+	this.instance_2.setTransform(191.55,482.45,0.5,0.5);
 
 	this.phg = new lib.Symbol1();
 	this.phg.name = "phg";
-	this.phg.setTransform(814.7,384);
+	this.phg.setTransform(814.7,516.8);
 
 	this.phb = new lib.Symbol1();
 	this.phb.name = "phb";
-	this.phb.setTransform(512,384);
+	this.phb.setTransform(512,516.8);
 
 	this.pha = new lib.Symbol1();
 	this.pha.name = "pha";
-	this.pha.setTransform(209.3,384);
+	this.pha.setTransform(209.3,516.8);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[]}).to({state:[{t:this.pha},{t:this.phb},{t:this.phg},{t:this.instance_2},{t:this.instance_1},{t:this.instance}]},1).wait(1));
+
+	// Layer_3
+	this.fdbck = new cjs.Text("", "bold 36px 'Calibri'");
+	this.fdbck.name = "fdbck";
+	this.fdbck.lineHeight = 46;
+	this.fdbck.lineWidth = 671;
+	this.fdbck.parent = this;
+	this.fdbck.setTransform(41.2,138.45);
+
+	this.instance_3 = new lib.CachedBmp_4();
+	this.instance_3.setTransform(257.3,20.85,0.5,0.5);
+
+	this.instance_4 = new lib.Bitmap1();
+	this.instance_4.setTransform(739,0,0.6338,0.6338);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[]}).to({state:[{t:this.instance_4},{t:this.instance_3},{t:this.fdbck}]},1).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new lib.AnMovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,862.7,593.5);
+p.nominalBounds = new cjs.Rectangle(0,0,1024.3,726.3);
 // library properties:
 lib.properties = {
 	id: '2F7756FE770C6540A21F4717F0E944B8',
@@ -152,7 +182,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/accel_check_partner_atlas_1.png?1693763960937", id:"accel_check_partner_atlas_1"}
+		{src:"images/accel_check_partner_atlas_1.png?1693764879861", id:"accel_check_partner_atlas_1"}
 	],
 	preloads: []
 };
