@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display Webcam Stream</title>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js" crossorigin="anonymous"></script>
+<style>
+#container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+#webcam {
+	width: 500px;
+	height: 375px;
+	background-color: #666;
+}
+#output_canvas {
+	width: 500px;
+	height: 375px;
+}
+</style>
+</head>
+ 
+<body>
+<div id="container">
+	<video autoplay="true" id="webcam" style=""></video>
+	<canvas id="output_canvas" style=""></canvas>
+</div>
+<script>
+var video = document.querySelector("#webcam");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    });
+}
+
+//const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm");
+</script>
+</body>
+</html>
