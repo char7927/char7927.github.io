@@ -602,7 +602,7 @@ if (reversed == null) { reversed = false; }
 					}
 					this.clicked = true;//part of preventing a new click until the mouth has closed
 					this.i_score_count = 0;
-					this.ms_count[0] = -1*this.ms_count[1];//keeps it waiting till buttons have settled
+					this.ms_count[0] = -0.5*this.ms_count[1];//keeps it waiting till buttons have settled
 					this.posMs();
 				}
 				this.line.graphics.clear();
