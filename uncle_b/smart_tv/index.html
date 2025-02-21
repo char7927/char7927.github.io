@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+<span id='outpt'></span>
+</body>
+<script>
+var spn = document.getElementById('outpt');
+var kes = [];
+spn.innerHTML = 'no input detected yet';
+document.addEventListener("DOMContentLoaded", function(e) {
+	createApp();
+});
+function createApp() {
+	console.log('loaded');
+	document.addEventListener("keydown", handleKeyPress);
+}
+function handleKeyPress(e) {
+	kes.push(e.keyCode);
+	spn.innerHTML = kes.join();
+}
+</script>
+</html>
