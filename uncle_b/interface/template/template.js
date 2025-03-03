@@ -277,7 +277,7 @@ if (reversed == null) { reversed = false; }
 		this.canvas_height = 576;
 		this.calibratng = false;
 		this.calibratng_text = '';
-		this.calib_default = {typ:'bs',id:25,thrsh:0.02,duratn:20};
+		this.calib_default = {typ:'bs',id:25,thrsh:0.02,duratn:25};
 		this.calib_info = new Object();
 		this.line = new createjs.Shape();
 		this.line.graphics.setStrokeStyle(10);
@@ -428,10 +428,10 @@ if (reversed == null) { reversed = false; }
 				this.calib_default.typ = 'bs';
 				this.calib_default.id = gotQueryParams.get('id');
 			}
-			console.log(document.cookie=='');
-			gotCookie = JSON.parse(document.cookie);
-			if(gotCookie.hasOwnProperty("thrsh_"+this.calib_default.typ+"_"+this.calib_default.id)) {//check if cookie property exists
+			console.log('there is no cookie',document.cookie=='');
+			if(document.cookie != '') {//check if cookie property exists
 				console.log('found cookie',gotCookie);
+				gotCookie = JSON.parse(document.cookie);
 				this.calib_info.typ = this.calib_default.typ;
 				this.calib_info.id = this.calib_default.id;
 				this.rline_vals[3] = this.calib_info.thrsh = gotCookie["thrsh_"+this.calib_default.typ+"_"+this.calib_default.id];
