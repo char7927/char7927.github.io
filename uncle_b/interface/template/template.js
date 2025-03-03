@@ -430,8 +430,8 @@ if (reversed == null) { reversed = false; }
 			}
 			console.log('there is no cookie',document.cookie=='');
 			if(document.cookie != '') {//check if cookie property exists
-				console.log('found cookie',gotCookie);
 				gotCookie = JSON.parse(document.cookie);
+				console.log('found cookie',gotCookie);
 				this.calib_info.typ = this.calib_default.typ;
 				this.calib_info.id = this.calib_default.id;
 				this.rline_vals[3] = this.calib_info.thrsh = gotCookie["thrsh_"+this.calib_default.typ+"_"+this.calib_default.id];
