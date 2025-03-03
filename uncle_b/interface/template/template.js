@@ -421,11 +421,14 @@ if (reversed == null) { reversed = false; }
 			this.cal_txt.mouseEnabled = false;
 			this.dur_txt.mouseEnabled = false;
 			gotQuery = window.location.search;
+			console.log(gotQuery);
 			gotQueryParams = new URLSearchParams(window.location.search);
+			console.log(gotQueryParams);
 			if(gotQueryParams.get('typ') == 'bs') {
 				this.calib_default.typ = 'bs';
 				this.calib_default.id = gotQueryParams.get('id');
 			}
+			console.log(document.cookie);
 			gotCookie = JSON.parse(document.cookie);
 			if(gotCookie.hasOwnProperty("thrsh_"+this.calib_default.typ+"_"+this.calib_default.id)) {//check if cookie property exists
 				console.log('found cookie',gotCookie);
