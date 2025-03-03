@@ -428,7 +428,7 @@ if (reversed == null) { reversed = false; }
 				this.calib_default.typ = 'bs';
 				this.calib_default.id = gotQueryParams.get('id');
 			}
-			console.log(document.cookie);
+			console.log(document.cookie,'cookie');
 			gotCookie = JSON.parse(document.cookie);
 			if(gotCookie.hasOwnProperty("thrsh_"+this.calib_default.typ+"_"+this.calib_default.id)) {//check if cookie property exists
 				console.log('found cookie',gotCookie);
