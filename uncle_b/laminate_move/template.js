@@ -591,34 +591,35 @@ if (reversed == null) { reversed = false; }
 			this.cal_ball.visible = false;
 			this.cal_square.visible = false;
 			this.scrn.visible = false;
-			var xs = [13,14,15,16];
-			var ys = [11,12,17,18];
+			//var xs = [13,14,15,16];
+			//var ys = [11,12,17,18];
+			var cs = [13,14,15,16,11,12,17,18];
 			var cals_x = {};
 			var cals_y = {};
 			var linreg_x = {};
 			var linreg_y = {};
 			var x_r2s = [];
 			var y_r2s = [];
-			for(var i=0; i<xs.length; i++) {
-				cals_x[xs[i]] = [];
-				cals_y[ys[i]] = [];
-				linreg_x[xs[i]] = [];
-				linreg_y[ys[i]] = [];
-				for(var j=0; j<this.calScores[xs[i]].length; j++) {
-					cals_x[xs[i]].push([this.calScores['x'][j],-1*Math.log10(this.calScores[xs[i]][j])]);
-					cals_y[ys[i]].push([this.calScores['y'][j],-1*Math.log10(this.calScores[ys[i]][j])]);
+			for(var i=0; i<cs.length; i++) {
+				cals_x[cs[i]] = [];
+				cals_y[cs[i]] = [];
+				linreg_x[cs[i]] = [];
+				linreg_y[cs[i]] = [];
+				for(var j=0; j<this.calScores[cs[i]].length; j++) {
+					cals_x[cs[i]].push([this.calScores['x'][j],-1*Math.log10(this.calScores[cs[i]][j])]);
+					cals_y[cs[i]].push([this.calScores['y'][j],-1*Math.log10(this.calScores[cs[i]][j])]);
 				}
-				var rgx = regression.linear(cals_x[xs[i]].slice(this.calBounds[0],this.calBounds[1]),{precision:20});
-				var rgy = regression.linear(cals_y[ys[i]].slice(this.calBounds[1],this.calBounds[2]),{precision:20});
-				linreg_x[xs[i]].push(rgx);
-				linreg_y[ys[i]].push(rgy);
+				var rgx = regression.linear(cals_x[cs[i]].slice(this.calBounds[0],this.calBounds[1]),{precision:20});
+				var rgy = regression.linear(cals_y[cs[i]].slice(this.calBounds[1],this.calBounds[2]),{precision:20});
+				linreg_x[cs[i]].push(rgx);
+				linreg_y[cs[i]].push(rgy);
 				x_r2s.push(rgx.r2);
 				y_r2s.push(rgy.r2);
 			}
 			var bx_ind = x_r2s.indexOf(math.max(x_r2s));
 			var by_ind = y_r2s.indexOf(math.max(y_r2s));
-			this.use_mcs_x.push([xs[bx_ind],linreg_x[xs[bx_ind]][0].equation[0],linreg_x[xs[bx_ind]][0].equation[1]]);
-			this.use_mcs_y.push([ys[by_ind],linreg_y[ys[by_ind]][0].equation[0],linreg_y[ys[by_ind]][0].equation[1]]);
+			this.use_mcs_x.push([cs[bx_ind],linreg_x[cs[bx_ind]][0].equation[0],linreg_x[cs[bx_ind]][0].equation[1]]);
+			this.use_mcs_y.push([cs[by_ind],linreg_y[cs[by_ind]][0].equation[0],linreg_y[cs[by_ind]][0].equation[1]]);
 			/*var best_tot_x_ind = tot_x_r2s.indexOf(math.max(tot_x_r2s));
 			var best_tot_y_ind = tot_y_r2s.indexOf(math.max(tot_y_r2s));
 			var best_x_inds = [];
