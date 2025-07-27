@@ -41,6 +41,33 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	}
 
 
+(lib.Symbol1 = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
+
+	// Layer_1
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f().s("#000000").ss(1,1,1).p("A3btLMAu3AAAIAAaXMgu3AAAg");
+	this.shape.setTransform(150,84.375);
+
+	this.shape_1 = new cjs.Shape();
+	this.shape_1.graphics.f("#FFFFFF").s().p("A3bNMIAA6XMAu3AAAIAAaXg");
+	this.shape_1.setTransform(150,84.375);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.Symbol1, new cjs.Rectangle(-1,-1,302,170.8), null);
+
+
 (lib.selectr = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = true; }
 if (reversed == null) { reversed = false; }
@@ -634,6 +661,8 @@ if (reversed == null) { reversed = false; }
 		this.colpos = [[80/80,550],[110/80,660],[130/80,800],[1,920],[50/80,1000],[20/80,1050]];
 		this.line = new createjs.Shape();
 		this.line.graphics.setStrokeStyle(10);
+		this.mini_line = new createjs.Shape();
+		this.mini_line.graphics.setStrokeStyle(10);
 		this.allLandmarks = null;
 		this.reslt = null;
 		this.resltSetInterval = null;
@@ -641,16 +670,20 @@ if (reversed == null) { reversed = false; }
 		this.waitInterval = null;
 		this.calStage = 0;
 		this.calScores = {};
+		this.cal_pos = [10,33,4,263,152];
 		this.cal_square_pos = [[650,950],[400,600]];
 		this.calBounds = [0];
 		this.use_mcs_x = [];//these will contain first the best overall, and then the spec for top, right, bottom, left
 		this.use_mcs_y = [];//contains little arrays of the score, the slope and the intercept
+		this.use_posx = {};
+		this.use_posy = {};
+		this.use_posz = {};
 		this.lastPos = [(this.cal_square_pos[0][0]+this.cal_square_pos[0][1])/2,(this.cal_square_pos[1][0]+this.cal_square_pos[1][1])/2];
 		this.calWaitr = [0,30];
 		
 		this.writeIt = function(ind) {
 			if(ind == 5) {
-				this.txt_out.text = '';
+				this.txt_out.text += ' - ';
 			}else if(ind == 10) {
 				this.txt_out.text = (this.txt_out.text).slice(0,-5);
 			}else if(ind == 11) {
@@ -661,39 +694,54 @@ if (reversed == null) { reversed = false; }
 		}
 		this.tweenIt = function(num, lowr, highr) {
 			if(num >= lowr && num <= highr) {
-				return 0;
-			}else if(num < lowr) {
-				return num - lowr;//give a negative number
+				return true;
 			}else{
-				return num - highr;
+				return false;
 			}
 		}
+		this.diffIt = function(num, lowr, highr) {
+			return num - ((lowr+highr)/2);
+		}
 		this.drawLandmarker = function() {
-			//console.log('called');
-			//console.log(this.use_mcs_x);
 			var ubx = 0;
 			var uby = 0;
-			//console.log(this.use_mcs_x[ubx][0]);
 			var bluntx = (-1*Math.log10(this.reslt.faceBlendshapes[0]['categories'][this.use_mcs_x[ubx][0]]['score'])-this.use_mcs_x[ubx][2])/this.use_mcs_x[ubx][1];
 			var blunty = (-1*Math.log10(this.reslt.faceBlendshapes[0]['categories'][this.use_mcs_y[uby][0]]['score'])-this.use_mcs_y[uby][2])/this.use_mcs_y[uby][1];
 			var smoothx = this.lastPos[0] + ((bluntx-this.lastPos[0])/6);
 			var smoothy = this.lastPos[1] + ((blunty-this.lastPos[1])/6);
 			this.lastPos = [smoothx,smoothy];
-			var inner_lims = [[750,850],[448.6,548.6]];
+			var inner_lims = [[760,840],[458.6,538.6]];
 			var outer_lims = [[500,1100],[248.6,748.6]];
 			//console.log(smoothx,Math.max(outer_lims[0][1],Math.min(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1])
-			var xdiff = this.tweenIt(Math.min(outer_lims[0][1],Math.max(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1]);
-			var ydiff = this.tweenIt(Math.min(outer_lims[1][1],Math.max(outer_lims[1][0],smoothy)), inner_lims[1][0], inner_lims[1][1]);
-			if(xdiff + ydiff == 0) {
+			var xtw = this.tweenIt(Math.min(outer_lims[0][1],Math.max(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1]);
+			var ytw = this.tweenIt(Math.min(outer_lims[1][1],Math.max(outer_lims[1][0],smoothy)), inner_lims[1][0], inner_lims[1][1]);
+			var xdiff = this.diffIt(Math.min(outer_lims[0][1],Math.max(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1]);
+			var ydiff = this.diffIt(Math.min(outer_lims[1][1],Math.max(outer_lims[1][0],smoothy)), inner_lims[1][0], inner_lims[1][1]);
+			var xease = ((-1*xdiff)/40);
+			var yease = ((-1*ydiff)/40);
+			if(xease > 0) {
+				xease = Math.min(xease,3);
+			}else{
+				xease = Math.max(xease,-3);
+			}
+			if(yease > 0) {
+				yease = Math.min(yease,3);
+			}else{
+				yease = Math.max(yease,-3);
+			}
+			if(Math.abs(xdiff) > 20 || Math.abs(ydiff) > 20) {
+				this.ltr_grid.x = Math.max(Math.min(this.ltr_grid.x + xease,1050),550);
+				this.ltr_grid.y = Math.max(Math.min(this.ltr_grid.y + yease,698.6),298.6);
+			}
+			if(xtw && ytw) {
 				var xind = Math.floor(((outer_lims[0][1])-this.ltr_grid.x)/100);
 				var yind = Math.floor(((outer_lims[1][1])-this.ltr_grid.y)/100);
 				var bind = (yind*6)+xind;
-				console.log(xind,yind,bind);
 				for(var i=0; i<this.ltrs.length; i++) {
 					if(i == bind) {
-						this.ltr_grid['btn_'+i].bgr.alpha = Math.min(this.ltr_grid['btn_'+i].bgr.alpha + 0.05,1);
+						this.ltr_grid['btn_'+i].bgr.alpha = Math.min(this.ltr_grid['btn_'+i].bgr.alpha + 0.03,1);
 					}else{
-						this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.1,0);
+						this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.001,0);
 					}
 				}
 				if(this.ltr_grid['btn_'+bind].bgr.alpha == 1) {
@@ -704,14 +752,17 @@ if (reversed == null) { reversed = false; }
 				}
 			}else{
 				for(var i=0; i<this.ltrs.length; i++) {
-					this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.1,0);			
+					this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.001,0);			
 				}
-				this.ltr_grid.x = Math.max(Math.min(this.ltr_grid.x + ((-1*xdiff)/(inner_lims[0][1]-inner_lims[0][0])*3),1050),550);
-				this.ltr_grid.y = Math.max(Math.min(this.ltr_grid.y + ((-1*ydiff)/(inner_lims[1][1]-inner_lims[1][0])*3),698.6),298.6);
 			}
 			this.line.graphics.clear();
 			this.line.graphics.beginFill('yellow').drawCircle(smoothx,smoothy,10);
 			this.line.graphics.endFill();
+			this.mini_line.graphics.clear();
+			for(var j=0; j<this.cal_pos.length; j++) {
+				this.mini_line.graphics.beginStroke('red').moveTo((this.use_posx[this.cal_pos[j]])*300,(this.use_posy[this.cal_pos[j]])*168.75);
+				this.mini_line.graphics.lineTo(this.reslt.faceLandmarks[0][this.cal_pos[j]].x*300,this.reslt.faceLandmarks[0][this.cal_pos[j]].y*168.75).endStroke();
+			}
 		}
 		
 		this.holdLandmarks = function(FLm) {
@@ -728,6 +779,7 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		this.useCalData = function() {
+			console.log('using');
 			this.cal_ball.visible = false;
 			this.cal_square.visible = false;
 			this.scrn.visible = false;
@@ -760,20 +812,11 @@ if (reversed == null) { reversed = false; }
 			var by_ind = y_r2s.indexOf(math.max(y_r2s));
 			this.use_mcs_x.push([cs[bx_ind],linreg_x[cs[bx_ind]][0].equation[0],linreg_x[cs[bx_ind]][0].equation[1]]);
 			this.use_mcs_y.push([cs[by_ind],linreg_y[cs[by_ind]][0].equation[0],linreg_y[cs[by_ind]][0].equation[1]]);
-			/*var best_tot_x_ind = tot_x_r2s.indexOf(math.max(tot_x_r2s));
-			var best_tot_y_ind = tot_y_r2s.indexOf(math.max(tot_y_r2s));
-			var best_x_inds = [];
-			var best_y_inds = [];
-			this.use_mcs_x.push([xs[best_tot_x_ind],tot_lin_x[best_tot_x_ind].equation[0],tot_lin_x[best_tot_x_ind].equation[1]]);
-			this.use_mcs_y.push([ys[best_tot_y_ind],tot_lin_y[best_tot_y_ind].equation[0],tot_lin_y[best_tot_y_ind].equation[1]]);
-			for(var m=0; m<x_r2s.length; m++) {
-				bx = x_r2s[m].indexOf(math.max(x_r2s[m]));
-				by = y_r2s[m].indexOf(math.max(y_r2s[m]));
-				this.use_mcs_x.push([xs[bx],linreg_x[xs[bx]][m].equation[0],linreg_x[xs[bx]][m].equation[1]]);
-				this.use_mcs_y.push([ys[by],linreg_y[ys[by]][m].equation[0],linreg_y[ys[by]][m].equation[1]]);
+			for(var k=0; k<this.cal_pos.length; k++) {
+				this.use_posx[this.cal_pos[k]] = math.mean(this.calScores['posx_'+this.cal_pos[k]]);
+				this.use_posy[this.cal_pos[k]] = math.mean(this.calScores['posy_'+this.cal_pos[k]]);
+				this.use_posz[this.cal_pos[k]] = math.mean(this.calScores['posz_'+this.cal_pos[k]]);
 			}
-			console.log(this.use_mcs_x);
-			console.log(this.use_mcs_y);*/
 		}
 		
 		this.calibrateIt = function() {
@@ -819,6 +862,11 @@ if (reversed == null) { reversed = false; }
 					for(var i=11; i<19; i++) {
 						this.calScores[i].push(this.reslt.faceBlendshapes[0]['categories'][i]['score']);
 					}
+					for(var j=0; j<this.cal_pos.length; j++) {
+						this.calScores['posx_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].x);
+						this.calScores['posy_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].y);
+						this.calScores['posz_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].z);
+					}
 					console.log('cal_data = '+JSON.stringify(this.calScores));
 					this.calBounds.push(this.calScores['x'].length);
 					//console.log(this.calBounds);	
@@ -835,6 +883,11 @@ if (reversed == null) { reversed = false; }
 			for(var i=11; i<19; i++) {
 				this.calScores[i].push(this.reslt.faceBlendshapes[0]['categories'][i]['score']);
 			}
+			for(var j=0; j<this.cal_pos.length; j++) {
+				this.calScores['posx_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].x);
+				this.calScores['posy_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].y);
+				this.calScores['posz_'+this.cal_pos[j]].push(this.reslt.faceLandmarks[0][this.cal_pos[j]].z);
+			}
 			}else{
 				this.calWaitr[0] = this.calWaitr[0]+1;
 				if(this.calWaitr[0] >= this.calWaitr[1]) {
@@ -849,11 +902,18 @@ if (reversed == null) { reversed = false; }
 				this.ltr_grid['btn_'+j].bgr.alpha = 0;
 			}
 			this.video_frame.addChild(this.line);
+			this.mini_scrn.addChild(this.mini_line);
 			for(var i=11; i<19; i++) {
 				this.calScores[i] = [];
 			}
 			this.calScores['x'] = [];
 			this.calScores['y'] = [];
+			for(k=0; k<this.cal_pos.length; k++) {
+				this.calScores['posx_'+this.cal_pos[k]] = [];
+				this.calScores['posy_'+this.cal_pos[k]] = [];
+				this.calScores['posz_'+this.cal_pos[k]] = [];
+			}
+			
 			this.waitInterval = setInterval(function() {
 				console.log('waiting');
 				if(this.reslt !== null) {
@@ -862,10 +922,67 @@ if (reversed == null) { reversed = false; }
 						this.calibrateIt();
 					}.bind(this),40);
 				}
-			}.bind(this),20);	
+			}.bind(this),20);
 			this.isSetup = true;
 		}
 		this.setup();
+		//legacy
+		/*
+		this.tweenIt = function(num, lowr, highr) {
+			if(num >= lowr && num <= highr) {
+				return 0;
+			}else{
+				return num - ((lowr+highr)/2);
+			}
+		}
+		this.drawLandmarker = function() {
+			//console.log('called');
+			//console.log(this.use_mcs_x);
+			var ubx = 0;
+			var uby = 0;
+			//console.log(this.use_mcs_x[ubx][0]);
+			var bluntx = (-1*Math.log10(this.reslt.faceBlendshapes[0]['categories'][this.use_mcs_x[ubx][0]]['score'])-this.use_mcs_x[ubx][2])/this.use_mcs_x[ubx][1];
+			var blunty = (-1*Math.log10(this.reslt.faceBlendshapes[0]['categories'][this.use_mcs_y[uby][0]]['score'])-this.use_mcs_y[uby][2])/this.use_mcs_y[uby][1];
+			var smoothx = this.lastPos[0] + ((bluntx-this.lastPos[0])/6);
+			var smoothy = this.lastPos[1] + ((blunty-this.lastPos[1])/6);
+			this.lastPos = [smoothx,smoothy];
+			var inner_lims = [[760,840],[458.6,538.6]];
+			var outer_lims = [[500,1100],[248.6,748.6]];
+			//console.log(smoothx,Math.max(outer_lims[0][1],Math.min(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1])
+			var xdiff = this.tweenIt(Math.min(outer_lims[0][1],Math.max(outer_lims[0][0],smoothx)), inner_lims[0][0], inner_lims[0][1]);
+			var ydiff = this.tweenIt(Math.min(outer_lims[1][1],Math.max(outer_lims[1][0],smoothy)), inner_lims[1][0], inner_lims[1][1]);
+			if(xdiff + ydiff == 0) {
+				var xind = Math.floor(((outer_lims[0][1])-this.ltr_grid.x)/100);
+				var yind = Math.floor(((outer_lims[1][1])-this.ltr_grid.y)/100);
+				var bind = (yind*6)+xind;
+				console.log(xind,yind,bind);
+				for(var i=0; i<this.ltrs.length; i++) {
+					if(i == bind) {
+						this.ltr_grid['btn_'+i].bgr.alpha = Math.min(this.ltr_grid['btn_'+i].bgr.alpha + 0.03,1);
+					}else{
+						this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.001,0);
+					}
+				}
+				if(this.ltr_grid['btn_'+bind].bgr.alpha == 1) {
+					this.writeIt(bind);
+					for(var j=0; j<this.ltrs.length; j++) {
+						this.ltr_grid['btn_'+j].bgr.alpha = 0;
+					}
+				}
+			}else{
+				for(var i=0; i<this.ltrs.length; i++) {
+					this.ltr_grid['btn_'+i].bgr.alpha = Math.max(this.ltr_grid['btn_'+i].bgr.alpha - 0.001,0);			
+				}
+				//this.ltr_grid.x = Math.max(Math.min(this.ltr_grid.x + ((-1*xdiff)/(inner_lims[0][1]-inner_lims[0][0])*1),1050),550);
+				//this.ltr_grid.y = Math.max(Math.min(this.ltr_grid.y + ((-1*ydiff)/(inner_lims[1][1]-inner_lims[1][0])*1),698.6),298.6);
+				this.ltr_grid.x = Math.max(Math.min(this.ltr_grid.x + ((-1*xdiff)/50),1050),550);
+				this.ltr_grid.y = Math.max(Math.min(this.ltr_grid.y + ((-1*ydiff)/50),698.6),298.6);
+			}
+			this.line.graphics.clear();
+			this.line.graphics.beginFill('yellow').drawCircle(smoothx,smoothy,10);
+			this.line.graphics.endFill();
+		}
+		*/
 	}
 
 	// actions tween:
@@ -916,6 +1033,13 @@ if (reversed == null) { reversed = false; }
 	this.selectr.setTransform(800,500,1,1,0,0,0,60,60);
 
 	this.timeline.addTween(cjs.Tween.get(this.selectr).wait(1));
+
+	// Layer_8
+	this.mini_scrn = new lib.Symbol1();
+	this.mini_scrn.name = "mini_scrn";
+	this.mini_scrn.setTransform(1348.1,354.7,1.621,1.621,0,0,180,150,84.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.mini_scrn).wait(1));
 
 	this._renderFirstFrame();
 
