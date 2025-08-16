@@ -1,20 +1,21 @@
 <html>
   <head>
     <script>
+    function handleOrientation(event) {
+      sp_1.innerHTML = event.alpha;
+    }
     function setUp() {
       sp_1 = document.getElementById('output_1');
       sp_2 = document.getElementById('output_2');
       sp_3 = document.getElementById('output_3');
       if(window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', function() {
-          sp_1.innerHTML = event.alpha+","+event.beta+","+event.gamma;
-        }, true);
+        window.addEventListener('deviceorientation', handleOrientation);
       }
       if(window.DeviceMotionEvent) {
-        sp_2.innerHTML = 'hey2';
+        sp_2.innerHTML = 'hey 2';
       }
       if(window.MozOrientationEvent) {
-        sp_3.innerHTML = 'hey3';
+        sp_3.innerHTML = 'hey 3';
       }
     }
     </script>
