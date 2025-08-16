@@ -1,4 +1,4 @@
-<html>
+vent.alpha<html>
   <head>
     <script>
     function handleOrientation(event) {
@@ -25,15 +25,15 @@
         DeviceMotionEvent.requestPermission();
       }
       window.addEventListener('deviceorientation', (event) => {
-        sp_1.innerHTML = 'why';
+        sp_1.innerHTML = event.alpha;
       });
     }
     </script>
   </head>
   <body onload="setUp();">
-    <span id='output_1'>till 0</span>
-    <span id='output_2'>till 0</span>
-    <span id='output_3'>till 0</span>
+    <span id='output_1'>till 2</span>
+    <span id='output_2'>till 2</span>
+    <span id='output_3'>till 2</span>
     <button id='permission' onclick="ask();">Start</button>
   </body>
 </html>
