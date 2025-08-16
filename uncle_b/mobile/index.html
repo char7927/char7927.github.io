@@ -24,6 +24,9 @@
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
+      window.addEventListener('deviceorientation', (event) => {
+        sp_1.innerHTML = 'why';
+      });
     }
     </script>
   </head>
