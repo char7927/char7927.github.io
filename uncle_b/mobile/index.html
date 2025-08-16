@@ -6,7 +6,9 @@
       sp_2 = document.getElementById('output_2');
       sp_3 = document.getElementById('output_3');
       if(window.DeviceOrientationEvent) {
-        sp_1.innerHTML = 'hey1';
+        window.addEventListener('deviceorientation', function() {
+          sp_1.innerHTML = event.alpha+","+event.beta+","+event.gamma;
+        }, true);
       }
       if(window.DeviceMotionEvent) {
         sp_2.innerHTML = 'hey2';
