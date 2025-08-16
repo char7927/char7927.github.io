@@ -9,7 +9,9 @@
       sp_2 = document.getElementById('output_2');
       sp_3 = document.getElementById('output_3');
       if(window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('deviceorientation', (event) => {
+          sp_1.innerHTML = 'why';
+        });
       }
       if(window.DeviceMotionEvent) {
         sp_2.innerHTML = 'hey 2';
