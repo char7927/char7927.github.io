@@ -2,12 +2,24 @@
   <head>
     <script>
     function setUp() {
-      sp = document.getElementById('output');
-      sp.innerHTML = 'hey';
+      sp_1 = document.getElementById('output_1');
+      sp_2 = document.getElementById('output_2');
+      sp_3 = document.getElementById('output_3');
+      if(window.DeviceOrientationEvent) {
+        sp_1.innerHTML = 'hey';
+      }
+      if(window.DeviceMotionEvent) {
+        sp_2.innerHTML = 'hey';
+      }
+      if(window.MozOrientationEvent) {
+        sp_3.innerHTML = 'hey';
+      }
     }
     </script>
   </head>
   <body onload="setUp();">
-    <span id='output'></span>
+    <span id='output_1'></span>
+    <span id='output_2'></span>
+    <span id='output_3'></span>
   </body>
 </html>
