@@ -25,7 +25,7 @@ vent.alpha<html>
         DeviceMotionEvent.requestPermission();
       }
       window.addEventListener('deviceorientation', (event) => {
-        sp_1.innerHTML = event.alpha;
+        sp_1.innerHTML = Math.round(event.alpha);
       });
     }
     </script>
