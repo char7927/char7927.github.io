@@ -5,33 +5,24 @@
       sp_1 = document.getElementById('output_1');
       sp_2 = document.getElementById('output_2');
       sp_3 = document.getElementById('output_3');
-     window.addEventListener('deviceorientation', (event) => {
-        sp_1.innerHTML = Math.round(event.alpha)+","+Math.round(event.beta);
-      });
-      /*if(window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', (event) => {
-          sp_1.innerHTML = 'why';
-        });
-      }
-      if(window.DeviceMotionEvent) {
-        sp_2.innerHTML = 'hey 2';
-      }
-      if(window.MozOrientationEvent) {
-        sp_3.innerHTML = 'hey 3';
-      }*/
+      mot = [];
+      ori = [];
     }
     function ask() {
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
       window.addEventListener('deviceorientation', (event) => {
-        sp_1.innerHTML = Math.round(event.alpha);
+        ori = [Math.round(event.alpha),Math.round(event.beta),Math.round(event.gamma)];
+        sp_1.innerHTML = ori.toString();
       });
+      window.addEventListener('devicemotion', (event) => {
+        sp_2.innerHTML = event.acceleration.x;
     }
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Information on</h2>
+    <h2>Information on motion</h2>
     <span id='output_1'>till 2</span><br />
     <span id='output_2'>till 2</span><br />
     <span id='output_3'>till 2</span><br />
