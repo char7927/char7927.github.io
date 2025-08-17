@@ -17,13 +17,13 @@
         sp_1.innerHTML = ori.toString();
       });
       window.addEventListener('devicemotion', (event) => {
-        sp_2.innerHTML = (event.acceleration.x).toFixed(2);
+        mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
       });
     }
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Information on motion rounded</h2>
+    <h2>Information on motion rounded and positive</h2>
     <span id='output_1'>till 2</span><br />
     <span id='output_2'>till 2</span><br />
     <span id='output_3'>till 2</span><br />
