@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style>
+            body {
+                counter-reset: heading;
+                counter-reset: figures;
+            }
+            h2:before {
+                content: counter(heading)" ";
+                counter-increment: heading;
+            }
+            h2 {
+                counter-reset: subheading;
+            }
+            h3:before {
+                content: counter(heading)"." counter(subheading)" ";
+                counter-increment: subheading;
+            }
+            figcaption:before {
+                content: 'Figure ' counter(figures) '. ';
+            }
+            figcaption {
+                counter-increment: figures;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Animating 'Step 1: Putting a tip on your pipette'</h1>
+        <h2>Introduction</h2>
+        <p>Proper use of equipment is an essential aspect of learning to work in the lab, and is often under-appreciated relative to understanding the science underpinning key techniques. Nonetheless, experiments cannot be performed effectively unless equipment is used correctly, and damage to equipment will negatively impact the long-term success of any research group, due to the costs of replacements.</p>
+        <p>Pipettes are a fundamental tool in any molecular biology lab, and the majority of labs will contain a range of pipettes for different volumes [1]. Pipettes are able to transfer volumes as low as 1uL and less; as well as being required for correctly creating reaction mixtures, the accuracy of pipettes allows laboratories to save money by carrying out experiments with very small amounts of expensive reagents [2].</p>
+        <h3>Air-Displacement Pipettes</h3>
+        <p>
+            Pipettes come in a variety of types<i>...more info on types</i>
+            . The air-displacement pipette is depicted in this animation because... Air-displacement pipettes work though expelling a volume of air equivalent to the volume of liquid required, and the partial vacuum created can be used to draw in the same volume of the desired liquid (figure 1) [3].
+        </p>
+        <figure>
+            <img src="pipette_diagram.jpg" alt="Adding alternative text that describes the image is good practice for inclusivity - it can be read by web programmes for those with sight impairments." , width=460, height=580>
+            <figcaption>Diagram depicting the function of air-displacement pipettes.</figcaption>
+        </figure>
+        <h3>The Importance of Tips</h3>
+        <p>In order to ensure the reliability of results, avoiding contamination of liquids is essential. For individual experiments, contamination of reaction mixtures, for example, could directly interfere with results in number of ways. In addition, contamination of stock solutions and other reagents, during the execution of particular experiments, has the potential to ruin future experiments in unpredictable ways. The use of disposable tips is an excellent way to prevent such cross-contamination of fluids, as long as tips are changed between uses.</p>
+        <p>In theory, the air-displacement pipettes could function without tips, by taking up liquid directly into the pipette. However, this would damage the internal working of the pipette, as well as raising the issues of contamination previously described.</p>
+        <h2>How the Animation Works</h2>
+        <h3>Getting the Tips</h3>
+        <p>The first step in the animation is to get the tips from a shelf. In practice, tips may be placed directly on the bench, inside a cupboard, or in a number of other locations. However, by requiring the student to get the tips in the animation, the need for tips is emphasized, important for the experiment itself and to avoid damaging the equipment</p>
+        <h3>Placing the Tip on the Pipette</h3>
+        <p>The animation shows the pipette lowering onto the tips while they are still in the box. This is the correct way to put the tip on the pipette. Without seeing how this is done, a student might, for example, take the tip out of the box and apply it with their hands, which is unlikely to form a tight seal, impacting the accuracy of pipetting.</p>
+        <h2>Additional Aspects to Consider</h2>
+        <p>Animation of this step of the protocol was a useful experience to emphasize some important points; of course, such an animation cannot fully replicate the realities of the lab.</p>
+        <h3>Choice of Tips</h3>
+        <p>Air displacement pipettes come in a range of sizes, and there are a corresponding range of tips that fit these different pipettes. These different tips vary in terms of the circumference at the top, which determines the fit of the tip to the pipette, and the length of the tip, which determines the volume that can be accommodated in the tip (figure 2).</p>
+        <figure>
+            <p>Another image would be here.</p>
+            <figcaption>Diagram representing the impact of tip-shape on pipetting. Figure legends can be much longer than this, it just so happens that a sentence is enough in these two cases.</figcaption>
+        </figure>
+        <p>The animation does not incorporate a choice of tips due to the time constraints of the project, although this is a potential error that students could make. If the tip circumference is too large it will not form an airtight seal with the pipette, though this should be apparent. A less obvious problem is if the tip fits but the length is too short; in this case, there is a risk of taking up liquid into the pipette and causing damage.</p>
+        <h3>Safety</h3>
+        <p>Safety considerations are not depicted in this animation. A key example is that the hand manipulating the pipette is not depicted, and therefore, does not remind the user that it is important to wear gloves, which is important for safety and avoiding contamination of the reagents.</p>
+        <p>In a typical lab, tip boxes would be stored with their lids on and down, in order to protect the tips from becoming contaminated with dust. This is particularly important for tips that need to be kept sterile.</p>
+        <h2>Conclusion</h2>
+        <p>This animation represented the attachment of a tip to a typical micropipette, a common part of many lab protocols. While this step seems trivial, correct execution is essential for the success of individual experiments, and to avoid damaging important pieces of lab equipment</p>
+        <p>If more time was available, and with further expertise in animation software and programming, there are many changes I would like to make. Improving the visual appearance would be an important first step, as this would be more enjoyable to use and could encourage deeper engagement and reflection on the educational aspects. I would also like to include more of the important safety aspects previously described, such as the wearing of gloves. However, as an educational tool whose primary aim is to enhance critical thinking through a deeper understanding of experimental design and trouble-shooting, including such aspects could distract from the primary aim of these animations.</p>
+        <p>Some statement on your feelings about the overall experience, what you’ve learned, what was challenging, how you managed the difficulties.</p>
+        <h2>Additional Resources for Students</h2>
+        <p>
+            A <a href="https://www.youtube.com/watch?v=Wx8clzD-CO4&ab_channel=Eppendorf" target="blank">YouTube video</a>
+            that provides a detailed explanation of how to use micropipettes.
+        </p>
+        <p>
+            This <a href="https://microbenotes.com/pipette-principle-parts-types-procedure-uses-examples/">webpage</a>
+            describes many different types of pipettes and how they work.
+        </p>
+        <h2>References</h2>
+        <ol>
+            <li>The formatting is up to you...</li>
+            <li>... but be consistent.</li>
+        </ol>
+    </body>
+</html>
