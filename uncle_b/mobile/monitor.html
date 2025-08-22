@@ -21,6 +21,8 @@
       }
     }
     function monitorMovement(event) {
+      mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
+      sp2.innerHTML = mot.toString();
       if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
         sp.innerHTML = 'Hello Uncle Bertram, are you OK?';
         const uttr = new SpeechSynthesisUtterance('hello');
