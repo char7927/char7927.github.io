@@ -27,7 +27,7 @@
         if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
           monitorin = false;
           sp.innerHTML = '';
-          const uttr = new SpeechSynthesisUtterance('row one, a to d and space');
+          const uttr = new SpeechSynthesisUtterance('row one, A to D, and space');
           uttr.addEventListener('end', (event) => {monitorin = true;});
           window.speechSynthesis.speak(uttr);
         }
@@ -51,7 +51,7 @@
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 10</h2>
+    <h2>Mobile Movement Monitor  - 11</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
