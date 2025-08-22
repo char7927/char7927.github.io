@@ -9,31 +9,30 @@
       mot_maxs = [];
       calibratin = true;
       cal_timeout = null;
-      acting = false;
+      actin = 0;
+    }
+    function calibrateStillness(event) {
+      mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
+      sp2.innerHTML = mot.toString();
+      if(mot_maxs.length == 0) {
+        mot_maxs = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
+      }else{
+        mot_maxs = [Math.max(Math.abs(event.acceleration.x).toFixed(4),mot_maxs[0]),Math.max(Math.abs(event.acceleration.y).toFixed(4),mot_maxs[1]),Math.max(Math.abs(event.acceleration.z).toFixed(4),mot_maxs[2])];
+      }
+    }
+    function monitorMovement(event) {
+      if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
+        sp.innerHTML = 'Hello Uncle Bertram, are you OK?';
+        const uttr = new SpeechSynthesisUtterance('hello');
+        window.speechSynthesis.speak(uttr);
+      }  
     }
     function ask() {
       sp.innerHTML = 'Calibrating...';
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
-      window.addEventListener('devicemotion', (event) => {
-        mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
-        sp2.innerHTML = mot.toString();
-        //sideways, up and down, back and forth
-        if(calibratin) {
-          if(mot_maxs.length == 0) {
-            mot_maxs = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
-          }else{
-            mot_maxs = [Math.max(Math.abs(event.acceleration.x).toFixed(4),mot_maxs[0]),Math.max(Math.abs(event.acceleration.y).toFixed(4),mot_maxs[1]),Math.max(Math.abs(event.acceleration.z).toFixed(4),mot_maxs[2])];
-          }
-        }else{
-          if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
-            sp.innerHTML = 'Hello Uncle Bertram, are you OK?';
-            const uttr = new SpeechSynthesisUtterance('hello');
-            window.speechSynthesis.speak(uttr);
-          }
-        }
-      });
+      window.addEventListener('devicemotion', calibrateStillness);
       cal_timeout = setTimeout(function() {
         calibratin = false;
         //sp.innerHTML = 'Stillness has been monitored. Movements can now be detected.';
@@ -43,7 +42,7 @@
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 3</h2>
+    <h2>Mobile Movement Monitor  - 4</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
