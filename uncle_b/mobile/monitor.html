@@ -3,9 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
     function setUp() {
-      sp_1 = document.getElementById('output_1');
-      sp_2 = document.getElementById('output_2');
-      sp_3 = document.getElementById('output_3');
+      sp = document.getElementById('output_1');
       mot = [];
       mot_maxs = [];
       calibratin = true;
@@ -27,23 +25,22 @@
             mot_maxs = [Math.max(Math.abs(event.acceleration.x).toFixed(4),mot_maxs[0]),Math.max(Math.abs(event.acceleration.y).toFixed(4),mot_maxs[1]),Math.max(Math.abs(event.acceleration.z).toFixed(4),mot_maxs[2])];
           }
         }else{
-          if(mot[0] > mot_maxs[0] || mot[1] > mot_maxs[1] || mot[2] > mot_maxs[2]) {
-            console.log('hey');
+          if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
+            sp.innerHTML = 'Hello Uncle Bertram, are you OK?';
           }
         }
       });
       cal_timeout = setTimeout(function() {
         calibratin = false;
-        sp_3.innerHTML = mot_maxs.toString();
+        sp.innerHTML = 'Stillness has been monitored. Movements can now be detected.';
       }, 10000);
     }
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Information plus cal_mot</h2>
-    <span id='output_1'>till 2</span><br />
-    <span id='output_2'>till 2</span><br />
-    <span id='output_3'>till 2</span><br />
+    <h2>Mobile Movement Monitor</h2>
+    <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
+    <p>Please note, the phone should be set to avoid time out.</p>
     <button id='permission' onclick="ask();">Start</button>
   </body>
 </html>
