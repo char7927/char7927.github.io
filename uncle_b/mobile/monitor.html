@@ -9,7 +9,7 @@
       mot_maxs = [];
       calibratin = true;
       cal_timeout = null;
-      monitorin = 0;
+      monitorin = true;
     }
     function calibrateStillness(event) {
       mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
@@ -34,7 +34,7 @@
     }
     function ask() {
       sp.innerHTML = 'Calibrating...';
-      window.speechSynthesis.speak(new SpeechSynthesisUtterance('calibrating, relax'));
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance('calibrating, please relax'));
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
@@ -50,7 +50,7 @@
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 8</h2>
+    <h2>Mobile Movement Monitor  - 9</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
