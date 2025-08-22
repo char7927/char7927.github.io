@@ -29,6 +29,7 @@
     }
     function ask() {
       sp.innerHTML = 'Calibrating...';
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance('calibrating, please do not move'));
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
@@ -38,12 +39,13 @@
         //sp.innerHTML = 'Stillness has been monitored. Movements can now be detected.';
         sp.innerHTML = mot_maxs.toString();
         window.removeEventListener('devicemotion', calibrateStillness);
+        window.addEventListener('devicemotion', monitorMovement);
       }, 5000);
     }
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 5</h2>
+    <h2>Mobile Movement Monitor  - 6</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
