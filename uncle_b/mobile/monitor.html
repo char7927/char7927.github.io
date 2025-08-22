@@ -47,5 +47,16 @@
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
     <button id='permission' onclick="ask();">Start</button>
+    <textarea id="textInput" rows="4" cols="50" placeholder="Type something..."></textarea><br>
+    <button onclick="speak()">Speak</button>
+
+    <script>
+        function speak() {
+            const text = document.getElementById('textInput').value;
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+
   </body>
 </html>
