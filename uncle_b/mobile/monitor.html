@@ -11,6 +11,7 @@
       acting = false;
     }
     function ask() {
+      sp.innerHTML = 'Calibrating...';
       if(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
       }
