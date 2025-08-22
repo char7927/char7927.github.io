@@ -4,6 +4,7 @@
     <script>
     function setUp() {
       sp = document.getElementById('output_1');
+      sp2 = document.getElementById('output_2');
       mot = [];
       mot_maxs = [];
       calibratin = true;
@@ -17,7 +18,7 @@
       }
       window.addEventListener('devicemotion', (event) => {
         mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
-        //sp_2.innerHTML = mot.toString();
+        sp2.innerHTML = mot.toString();
         //sideways, up and down, back and forth
         if(calibratin) {
           if(mot_mins.length == 0) {
@@ -33,7 +34,8 @@
       });
       cal_timeout = setTimeout(function() {
         calibratin = false;
-        sp.innerHTML = 'Stillness has been monitored. Movements can now be detected.';
+        //sp.innerHTML = 'Stillness has been monitored. Movements can now be detected.';
+        sp.innerHTML = mot_maxs.toString();
       }, 10000);
     }
     </script>
@@ -41,6 +43,7 @@
   <body onload="setUp();">
     <h2>Mobile Movement Monitor</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
+    <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
     <button id='permission' onclick="ask();">Start</button>
   </body>
