@@ -29,7 +29,8 @@
         }else{
           if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
             sp.innerHTML = 'Hello Uncle Bertram, are you OK?';
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance('hello'));
+            const uttr = new SpeechSynthesisUtterance('hello');
+            window.speechSynthesis.speak(uttr);
           }
         }
       });
