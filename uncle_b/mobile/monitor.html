@@ -10,6 +10,11 @@
       calibratin = true;
       cal_timeout = null;
       monitorin = true;
+      lev_ind = [0,0];
+      pauseTimeout = null;
+      ops = [["letters A to D, and space","letters E to H, and delete","letters I to N", "letters to O to T", "letters U to Z", "back to beginning", "stop"],
+      [["A","B",'C','D','space'],['E','F','G','H','delete'],['I','J','K','L','M','N'],['O','P','Q','R','S','T'],['U','V','W','X','Y','Z']],
+      'You have selected '];
     }
     function calibrateStillness(event) {
       mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
@@ -20,16 +25,30 @@
         mot_maxs = [Math.max(Math.abs(event.acceleration.x).toFixed(4),mot_maxs[0]),Math.max(Math.abs(event.acceleration.y).toFixed(4),mot_maxs[1]),Math.max(Math.abs(event.acceleration.z).toFixed(4),mot_maxs[2])];
       }
     }
+    function playOptions(lev, ind) {
+      const uttr = new SpeechSynthesisUtterance(ops[lev][ind]);
+      uttr.addEventListener('end', pauseIt);
+      window.speechSynthesis.speak(uttr);
+    }
+    function pauseIt() {
+      if(lev_ind[1] < ops[lev_ind[0]].length-1) {
+        lev_ind[1] += 1;
+        pauseTimeout = setTimeout(playOptions, 3000, lev_ind[0], lev_ind[1]);
+      }else{
+        return;
+      }
+    }
     function monitorMovement(event) {
       mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
       sp2.innerHTML = mot.toString();
-      if(monitorin) {
-        if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
+      if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
+        if(monitorin) {
           monitorin = false;
-          sp.innerHTML = '';
-          const uttr = new SpeechSynthesisUtterance('row one, A to D, and space');
+          playOptions(0,0);
+          //sp.innerHTML = '';
+          /*const uttr = new SpeechSynthesisUtterance(ops[0][lev_ind[1]);
           uttr.addEventListener('end', (event) => {monitorin = true;});
-          window.speechSynthesis.speak(uttr);
+          window.speechSynthesis.speak(uttr);*/
         }
       }
     }
@@ -51,7 +70,7 @@
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 11</h2>
+    <h2>Mobile Movement Monitor  - 12</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
