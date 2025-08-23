@@ -9,7 +9,7 @@
       mot_maxs = [];
       calibratin = true;
       cal_timeout = null;
-      monitorin = true;
+      monitorin = 0;
       lev_ind = [0,0];
       pauseTimeout = null;
       ops = [["letters A to D, and space","letters E to H, and delete","letters I to N", "letters to O to T", "letters U to Z", "back to beginning", "stop"],
@@ -44,13 +44,17 @@
       mot = [Math.abs(event.acceleration.x).toFixed(4),Math.abs(event.acceleration.y).toFixed(4),Math.abs(event.acceleration.z).toFixed(4)];
       sp2.innerHTML = mot.toString();
       if(mot[0] > mot_maxs[0]*1.1 || mot[1] > mot_maxs[1]*1.1 || mot[2] > mot_maxs[2]*1.1) {
-        if(monitorin) {
-          monitorin = false;
+        if(monitorin == 0) {
+          monitorin = 1;
           playOptions(0,0);
           //sp.innerHTML = '';
           /*const uttr = new SpeechSynthesisUtterance(ops[0][lev_ind[1]);
           uttr.addEventListener('end', (event) => {monitorin = true;});
           window.speechSynthesis.speak(uttr);*/
+        }else if(monitorin == 1) {
+          monitorin = 2;
+          lev_ind = [lev_ind[1],0];
+          playOptions(lev_ind[0],lev_ind[1]);
         }
       }
     }
@@ -72,7 +76,7 @@
     </script>
   </head>
   <body onload="setUp();">
-    <h2>Mobile Movement Monitor  - 12</h2>
+    <h2>Mobile Movement Monitor  - 13</h2>
     <span id='output_1'>Please give Uncle Bertram the phone, and then press start to calibrate stillness.</span><br />
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
