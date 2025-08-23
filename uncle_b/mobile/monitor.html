@@ -35,6 +35,8 @@
         lev_ind[1] += 1;
         pauseTimeout = setTimeout(playOptions, 3000, lev_ind[0], lev_ind[1]);
       }else{
+        lev_ind = [0,0];
+        monitorin = true;
         return;
       }
     }
