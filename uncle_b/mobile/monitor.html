@@ -12,6 +12,7 @@
       monitorin = 0;
       lev_ind = [0,0];
       pauseTimeout = null;
+      dv = document.getElementById('console');
       ops = [["letters A to D, and space","letters E to H, and delete","letters I to N", "letters to O to T", "letters U to Z", "back to beginning", "stop"],
       [["A","B",'C','D','space'],['E','F','G','H','delete'],['I','J','K','L','M','N'],['O','P','Q','R','S','T'],['U','V','W','X','Y','Z']],
       'You have selected '];
@@ -29,6 +30,7 @@
       const uttr = new SpeechSynthesisUtterance(ops[lev][ind]);
       uttr.addEventListener('end', pauseIt);
       window.speechSynthesis.speak(uttr);
+      dv.innerHTML += ops[lev][ind];
     }
     function pauseIt() {
       if(lev_ind[1] < ops[lev_ind[0]].length-1) {
@@ -47,10 +49,6 @@
         if(monitorin == 0) {
           monitorin = 1;
           playOptions(0,0);
-          //sp.innerHTML = '';
-          /*const uttr = new SpeechSynthesisUtterance(ops[0][lev_ind[1]);
-          uttr.addEventListener('end', (event) => {monitorin = true;});
-          window.speechSynthesis.speak(uttr);*/
         }else if(monitorin == 1) {
           monitorin = 2;
           lev_ind = [lev_ind[1],0];
@@ -81,16 +79,9 @@
     <span id='output_2'></span><br />
     <p>Please note, the phone should be set to avoid time out.</p>
     <button id='permission' onclick="ask();">Start</button>
-    <!--<textarea id="textInput" rows="4" cols="50" placeholder="Type something..."></textarea><br>
-    <button onclick="speak()">Speak</button>
-
-    <script>
-        function speak() {
-            const text = document.getElementById('textInput').value;
-            const utterance = new SpeechSynthesisUtterance(text);
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>-->
+    <div id='console'>
+      
+    </div>
 
   </body>
 </html>
