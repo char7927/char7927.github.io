@@ -1,0 +1,49 @@
+<html>
+<head>
+<script>
+const date = new Date();
+//date.setHours(1);
+const first_day = new Date("2026-02-17");//represents evening of first day of ramadan, fasting started on the 18th
+const fajr = [[5,31],[5,29],[5,27],[5,25],[5,23],[5,21],[5,19],[5,17],[5,14],[5,12],[5,10],[5,8],[5,6],[5,4],[5,2],[4,59],[4,57],[4,55],[4,53],[4,51],[4,48],[4,46],[4,44],[4,42],[4,39],[4,37],[4,35],[4,33],[4,30],[4,28],[4,26],[4,25],[4,22]];
+const magh = [[17,22],[17,24],[17,26],[17,28],[17,30],[17,31],[17,33],[17,35],[17,37],[17,39],[17,40],[17,42],[17,44],[17,46],[17,47],[17,49],[17,51],[17,53],[17,54],[17,56],[17,58],[18,00],[18,01],[18,03],[18,05],[18,06],[18,08],[18,10],[18,12],[18,13],[18,15],[18,17],[18,18],[18,20],[18,22],[18,23],[18,25],[18,27],[18,28],[18,30]];
+var day_ms = 24*60*60*1000;
+function outputDate() {
+	var day_diff = Math.floor((date - first_day)/day_ms);
+	var this_fajr = new Date();
+	var this_magh = new Date();	this_fajr.setHours(fajr[day_diff][0],fajr[day_diff][1]);
+	this_magh.setHours(magh[day_diff][0],magh[day_diff][1]);
+	/*var messg = "Today is: "+date+"<br />"+day_diff;
+	messg += "<br/> today fajr is at: "+this_fajr;
+	messg += "<br/> today maghrib is at: "+this_magh+"<br/>";*/
+	var messg = "";
+	if(date < this_magh) {
+		if(date < this_fajr) {
+			messg += "It is night "+day_diff+" of Ramadan and the last third starts at ";
+			var last_magh = new Date();
+			last_magh.setDate(this_magh.getDate()-1);
+			last_magh.setHours(magh[day_diff-1][0],magh[day_diff-1][1]);
+			//messg += last_magh;
+			var night_third = (this_fajr - last_magh)/3;
+			var lt = new Date(this_fajr-night_third);
+			messg += lt.getHours()+":"+lt.getMinutes()+".";
+			
+		}else{
+			messg += "Today is day "+(day_diff)+" of fasting, and you can break your fast at "+this_magh.getHours()+":"+this_magh.getMinutes()+".<br />";
+		}
+	}else{
+		messg += "It is night "+(day_diff+1)+" of Ramadan, and the last third of the night starts at ";
+		var next_fajr = new Date();
+		next_fajr.setDate(this_fajr.getDate()+1);
+		next_fajr.setHours(fajr[day_diff+1][0],fajr[day_diff+1][1]);
+		var night_third = (next_fajr-this_magh)/3;
+		var lt = new Date(next_fajr-night_third);
+		messg += lt.getHours()+":"+lt.getMinutes()+".";
+	}
+	document.getElementById('currentDate').innerHTML = messg;
+}
+</script>
+</head>
+<body onload="outputDate();">
+<span id="currentDate"></span>
+</body>
+</html>
