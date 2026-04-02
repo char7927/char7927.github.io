@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>17</title>
+    <title>18</title>
     <style>
       #webcam, #canvas {
         top:0;
@@ -35,6 +35,17 @@
     }else{
       alert('false');
     }
-    
+    const input = document.getElementById("mobile-camera");
+    const output = document.getElementById('output');
+    input.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if(file) {
+        const tempUrl = URL.createObjectURL(file);
+        output.src = tempUrl;
+        output.onload = () => {
+          URL.revokeObjectURL(tempUrl);
+        };
+      }
+    });
   </script>
 </html>
