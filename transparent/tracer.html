@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>8</title>
+    <title>9</title>
   </head>
   <body>
     <video id="webcam" autoplay="true" width="100%" height="100%"></video>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" s></canvas>
   </body>
   <script>
     const video = document.getElementById("webcam");
-    const constraints = {video: {facingMode: "environment"}};
+    const constraints = {video: true};//{facingMode: "environment"}};
     if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         video.srcObject = stream;
