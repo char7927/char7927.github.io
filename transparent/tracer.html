@@ -8,8 +8,12 @@
     <video id="webcam" autoplay="true" width="640" height="480"></video>
   </body>
   <script>
+    const video = document.getElementById("webcam");
+    const constraints = {video: true};
     if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-      alert('true');
+      navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+        video.srcObject = stream;
+      });
     }else{
       alert('false');
     }
