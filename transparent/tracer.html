@@ -2,12 +2,16 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>3</title>
+    <title>4</title>
   </head>
   <body>
     <video id="webcam" autoplay="true" width="640" height="480"></video>
   </body>
   <script>
-    alert(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+      alert('true');
+    }else{
+      alert('false');
+    }
   </script>
 </html>
