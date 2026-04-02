@@ -2,20 +2,12 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>2</title>
+    <title>3</title>
   </head>
   <body>
-    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <video id="webcam" autoplay="true" width="640" height="480"></video>
   </body>
   <script>
-    /*const constraints = {
-      video: {
-        facingMode: "environment"
-      }
-    };
-
-    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-      const videoElement = document.querySelector('video');
-      videoE*/
+    alert(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   </script>
 </html>
