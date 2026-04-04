@@ -25,7 +25,7 @@
   <script>
     //https://www.dynamsoft.com/codepool/camera-focus-control-on-web.html
     const video = document.getElementById("webcam");
-    const constraints = {video: {facingMode: "environment", focusMode: "manual"}};
+    const constraints = {video: {facingMode: "environment"}};
     if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         video.srcObject = stream;
