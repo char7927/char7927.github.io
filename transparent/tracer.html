@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>19</title>
+    <title>20</title>
     <style>
       #webcam, #canvas {
         top:0;
@@ -23,15 +23,12 @@
     </div>
   </body>
   <script>
+    //https://www.dynamsoft.com/codepool/camera-focus-control-on-web.html
     const video = document.getElementById("webcam");
-    const constraints = {video: {facingMode: "environment"}};
+    const constraints = {video: {facingMode: "environment", focusMode: "manual"}};
     if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         video.srcObject = stream;
-        /*video.onloadedmetadata = () => {
-          canvas.width = video.offsetWidth;//videoWidth;
-          canvas.height = video.offsetHeight;//videoHeight;
-        };*/
       });
     }else{
       alert('false');
